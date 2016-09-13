@@ -10,16 +10,18 @@ var app = new Express();
 var router = Express.Router();
 
 //Database settings
-/*
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://127.0.0.1/Firefighter');/*,function(){
+    mongoose.connection.db.dropDatabase();
+ });*/
 
-mongoose.connect(config.mongoURI[app.settings.env]);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
     console.log("Database connected");
 });
 
-*/
+
 //Setup Port
 var port = process.env.PORT || 8080;
 app.set('port', port);
@@ -39,7 +41,7 @@ app.use(function(req, res, next) {
 });
 
 //Configuring routes
-routes(router);
+app.use('/api', routes);
 
 // START THE app
 app.listen(app.get('port'), function(){
