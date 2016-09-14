@@ -1,8 +1,6 @@
 //Basic Crud template
 var _ = require('lodash');
 
-
-
 function readRequest(object, Model, req) {
 	var Attributes = _.keys(Model.schema.paths);
 	

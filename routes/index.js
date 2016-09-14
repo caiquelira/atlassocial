@@ -9,7 +9,8 @@ var Usuario = require('../models/usuario');
 
 
 router.get('/', function(req, res) {
-	res.send("Hello World. Oie.");
+	console.log(req.user)
+	res.render('home', { user: req.user });
 });
 
 crud(router, '/sensores', Sensor);
