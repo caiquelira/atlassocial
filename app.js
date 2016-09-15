@@ -4,7 +4,6 @@ var bodyParser = require ("body-parser");
 var logger = require('morgan');
 var mongoose = require('mongoose');
 var cookieParser = require('cookie-parser');
-var morgan = require('morgan');
 var session = require('express-session');
 
 
@@ -42,13 +41,13 @@ app.use(Express.static(__dirname + '/views'));
 app.use(Express.static(__dirname + '/public'));
 
 //Logger
+app.use(logger('dev'));/*
 app.use(morgan('combined'));
-//Passing cookie
+*///Passing cookie
 app.use(cookieParser());
 app.use(session({ secret: 'vilaSTF111', resave: true, saveUninitialized: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(logger('dev'));
 
 app.use(function(req, res, next) {
 	res.header('Access-Control-Allow-Origin', '*');
@@ -67,7 +66,6 @@ passport.use(new Strategy({
 	callbackURL: "http://localhost:8080/login/facebook/return"
 },
 	function(accessToken, refreshToken, profile, done) {
-		console.log(profile)
 		return done(null, profile);
 	}
 ));
@@ -88,7 +86,7 @@ passport.deserializeUser(function(obj, done) {
 });
 
 //Home
-app.get('/', function(req, res) {
+app.get('/teste', function(req, res) {
 	res.render('home', { user: req.user });
 });
 

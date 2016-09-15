@@ -22,14 +22,13 @@ function saveModel(object, res){
 			res.send(err);
 		}
 		else {
-			console.log('Modelo salvo!', object);
+			console.log('Modelo salvo! \n', object);
 			res.status(200).json({SUCCESS: object});
 		}
 	});
 }
 
 function findObject(Model, param, uniqueIdentifier, cb){
-	console.log(param)
 	var returnObject;
 	if (_.isUndefined(uniqueIdentifier)){
 		Model.findById(param, function(err, object){
@@ -53,7 +52,6 @@ module.exports = function(router, route, Model, uniqueIdentifier) {
 	
 	//LIST
 	router.get(route, function(req, res) {
-
         Model.find(function(err, objects) {
           if (err)
               res.send(err);
