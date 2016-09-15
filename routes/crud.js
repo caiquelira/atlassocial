@@ -1,5 +1,6 @@
 //Basic Crud template
 var _ = require('lodash');
+var mongoose = require('mongoose');
 
 function readRequest(object, Model, req) {
 	var Attributes = _.keys(Model.schema.paths);
@@ -27,7 +28,28 @@ function saveModel(object, res){
 	});
 }
 
-module.exports = function(router, route, Model) {
+function findObject(Model, param, uniqueIdentifier, cb){
+	console.log(param)
+	var returnObject;
+	if (_.isUndefined(uniqueIdentifier)){
+		Model.findById(param, function(err, object){
+			if (err)
+              res.send(err);
+
+			cb(object);
+		});
+	}
+	else{
+		Model.findOne({uniqueIdentifier: param}, function(err, object){
+			if (err)
+              res.send(err);
+
+			cb(object);
+		});
+	}
+}
+
+module.exports = function(router, route, Model, uniqueIdentifier) {
 	
 	//LIST
 	router.get(route, function(req, res) {
@@ -53,45 +75,35 @@ module.exports = function(router, route, Model) {
 	});
 	
 	//READ
-	router.get(route + '/:Alias', function(req, res){
-
-		Model.findOne({'alias': req.params.Alias}, function(err, object){
-			res.send(object);
-		});
+	router.get(route + '/:UniqueIdentifier', function(req, res){
+		findObject(Model, req.params.UniqueIdentifier, uniqueIdentifier, function(object){	
+			res.send(object);	
+		});	
 	});
 
 	//UPDATE
-	router.patch(route + '/:Alias', function(req, res){
-
-		Model.findOne({'alias': req.params.Alias}, function(err, object){
-
+	router.patch(route + '/:UniqueIdentifier', function(req, res){
+		
+		findObject(Model, req.params.UniqueIdentifier, uniqueIdentifier, function(object){
 			object = readRequest(object, Model, req);
-
 			saveModel(object, res);
-		});
+		});	
 	});
 
 	//DELETE
-	router.delete(route + '/:Alias', function(req,res){
-		Model.findOne({'alias': req.params.Alias}, function(err, object) {
-			if(err) {
-				res.json({ERROR: err});
-			}
-			else {
-				object.remove(function(err) {
-					if(err) {
-						res.json({ERROR: err});
-					}
-					else {
-						res.json({DELETED: object});
-					}
-				});
-			}
+	router.delete(route + '/:UniqueIdentifier', function(req,res){
+
+		findObject(Model, req.params.UniqueIdentifier, uniqueIdentifier, function(object){
+			object.remove(function(err) {
+				if(err) {
+					res.json({ERROR: err});
+				}
+				else {
+					res.json({DELETED: object});
+				}
+			});
 		});
 	});
-
-
-
 
 	return router;
 }
