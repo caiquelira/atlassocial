@@ -94,7 +94,7 @@ app.get('/teste', function(req, res) {
 authService(app);
 
 // Debug React
-if (process.env.NODE_ENV.trim() === 'react') {
+if (process.env.NODE_ENV && process.env.NODE_ENV.trim() === 'react') {
 	console.log("oi peh")
 
 	var webpack = require("webpack");

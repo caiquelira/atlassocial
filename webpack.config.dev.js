@@ -2,14 +2,13 @@ var path = require("path");
 var webpack = require("webpack");
 
 module.exports = {
-  devtool: 'cheap-module-eval-source-map',
   entry: [
     "babel-polyfill",
     "./public/src/main.js",
     "webpack-hot-middleware/client"
   ],
   output: {
-    path: path.join(__dirname, 'build'),
+    path: path.join(__dirname, 'public/build'),
     filename: "bundle.js",
     publicPath: "/build/"
   },
@@ -19,7 +18,7 @@ module.exports = {
     root: path.resolve("./src"), // must be absolute path
     extensions: ["", ".js"]
   },
-  devtool: "source-map", // source maps to ease debugging
+  devtool: "cheap-module-eval-source-map", // source maps to ease debugging
   module: {
     loaders: [
       {
