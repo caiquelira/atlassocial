@@ -8,6 +8,7 @@ var morgan = require('morgan');
 var session = require('express-session');
 
 
+//Configuring routes (APIs)
 var routes = require('./routes/index');
 var authService = require('./routes/auth-service');
 
@@ -15,10 +16,6 @@ var authService = require('./routes/auth-service');
 var passport = require('passport');
 var Strategy = require('passport-facebook').Strategy;
 
-// Debug React
-var webpack = require("webpack");
-var config = require("./webpack.config.dev");
-var compiler = webpack(config);
 
 //Setting up the app
 var app = new Express();
@@ -98,22 +95,26 @@ app.get('/', function(req, res) {
 //Configurating auth-service
 authService(app);
 
-//Configuring routes (APIs)
 // Debug React
-app.use(require('webpack-dev-middleware')(compiler, {
-    noInfo: true,
-    publicPath: config.output.publicPath
-}));
+if (process.env.NODE_ENV.trim() === 'react') {
+	console.log("oi peh")
 
-app.use(require('webpack-hot-middleware')(compiler));
-
+	var webpack = require("webpack");
+	var config = require("./webpack.config.dev");
+	var compiler = webpack(config);
+	app.use(require('webpack-dev-middleware')(compiler, {
+	    noInfo: true,
+	    publicPath: config.output.publicPath
+	}));
+	app.use(require('webpack-hot-middleware')(compiler));
+}
 
 //Configuring routes
 app.use('/api', routes);
 
 // START THE app
 app.listen(app.get('port'), function(){
-    console.log("Server listening to port " + app.get('port') + " using webpack.");
+    console.log("Server listening to port " + app.get('port'));
 });
 
 module.exports = app;
