@@ -8,11 +8,6 @@ var Sensor = require('../models/sensor');
 var Usuario = require('../models/usuario');
 
 
-router.get('/', function(req, res) {
-	console.log(req.user)
-	res.render('home', { user: req.user });
-});
-
 crud(router, '/sensores', Sensor);
 crud(router, '/usuarios', Usuario);
 
