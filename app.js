@@ -64,7 +64,8 @@ passport.use(new Strategy({
 	clientID: "181579062250918",
 	clientSecret: "d522dffb41d5f912c9d5734a1149b28a",
 	//Need authorization at developers.facebook.com
-	callbackURL: "http://localhost:8080/auth-service/login/facebook/return"
+	//callbackURL: "http://localhost:8080/auth-service/login/facebook/return"
+	callbackURL: "http://atlassocial.herokuapp.com/auth-service/login/facebook/return"
 },
 	function(accessToken, refreshToken, profile, done) {
 		//See if someone has this ID.
