@@ -24,17 +24,23 @@ module.exports = {
         })
     ],
     module: {
-        loaders: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loaders: ["babel"]
-            },
-            {
-              test: /\.scss$/,
-              loader: 'style!css!sass?outputStyle=compressed'
-            }
-        ],
+      loaders: [
+        {
+          // pre-process every *.js file (except for ones in
+          // node_modules/) with Babel:
+          test: /\.js$/,
+          exclude: /node_modules/,
+          loaders: ["babel"]
+        },
+        {
+         test: /\.scss$/,
+         loader: 'style!css!sass'
+        },
+        {
+          test: /\.css$/, // Only .css files
+          loader: 'style!css' // Run both loaders
+        }
+      ],
       sassLoader: {
         includePaths: [
           './node_modules'
