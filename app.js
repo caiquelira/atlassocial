@@ -25,8 +25,12 @@ var router = Express.Router();
 
 //Database settings
 mongoose.Promise = global.Promise;
+var options = {
+	user: 'atlasadmin',
+	pass: 'atlasadmin'
+}
 //mongoose.connect('mongodb://127.0.0.1/Yano');
-mongoose.connect('mongodb://<dbuser>:<dbpassword>@ds033076.mlab.com:33076/atlassocial_dev');
+mongoose.connect('mongodb://<dbuser>:<dbpassword>@ds033076.mlab.com:33076/atlassocial_dev', options);
 
 
 var db = mongoose.connection;
