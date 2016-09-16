@@ -16,7 +16,7 @@ module.exports = {
   // when importing from src/<file>.js, only need to specify as <file>
   resolve: {
     root: path.resolve("./src"), // must be absolute path
-    extensions: ["", ".js"]
+    extensions: ['', '.js', '.scss', '.css']
   },
   devtool: "cheap-module-eval-source-map", // source maps to ease debugging
   module: {
@@ -25,13 +25,23 @@ module.exports = {
         // pre-process every *.js file (except for ones in
         // node_modules/) with Babel:
         test: /\.js$/,
-          exclude: /node_modules/,
-          loaders: [
-            // invokes Babel to translate React and ES6
-            "babel"
-          ]
+        exclude: /node_modules/,
+        loaders: ["babel"]
       },
-    ]
+      {
+       test: /\.scss$/,
+       loader: 'style!css!sass'
+      },
+      {
+        test: /\.css$/, // Only .css files
+        loader: 'style!css' // Run both loaders
+      }
+    ],
+    sassLoader: {
+      includePaths: [
+        './node_modules'
+      ]
+    }
   },
   plugins: [
       new webpack.optimize.OccurenceOrderPlugin(),

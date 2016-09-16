@@ -10,7 +10,7 @@
     "build:prod": "NODE_ENV=production webpack --progress --colors --config webpack.config.prod.js",
     "build": "npm run clean && npm run build:dev",
     "postinstall": "npm run clean && npm run build:prod",
-    "react": "set NODE_ENV=react && node app.js",
+    "react": "rm -rf ./public/build && set NODE_ENV=react && node app.js",
     "start": "node app.js"
   },
   "repository": {
@@ -31,16 +31,21 @@
     "babel-preset-react": "^6.11.1",
     "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",
+    "css-loader": "^0.23.1",
     "ejs": "^2.5.2",
     "express": "^4.14.0",
     "express-session": "^1.14.1",
+    "grommet": "^0.6.11",
     "lodash": "^4.15.0",
     "mongoose": "^4.6.0",
     "morgan": "^1.7.0",
+    "node-sass": "^3.8.0",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
+    "sass-loader": "^4.0.0",
+    "style-loader": "^0.13.1",
     "underscore": "^1.8.3",
     "webpack": "^1.13.2"
   },
@@ -51,4 +56,3 @@
     "webpack-hot-middleware": "^2.12.2"
   }
 }
-

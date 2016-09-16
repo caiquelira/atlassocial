@@ -28,11 +28,17 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loaders: [
-                  // invokes Babel to translate React and ES6
-                  "babel-loader?cacheDirectory&presets[]=latest&presets[]=react"
-                ]
+                loaders: ["babel"]
+            },
+            {
+              test: /\.scss$/,
+              loader: 'style!css!sass?outputStyle=compressed'
             }
+        ],
+      sassLoader: {
+        includePaths: [
+          './node_modules'
         ]
+      }
     }
 };
