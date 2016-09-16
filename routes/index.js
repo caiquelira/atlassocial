@@ -13,7 +13,7 @@ var router = Express.Router();
 	"uniqueID": "NameOfSchemaAttribute"
 	//Segurança. Pode passar um arquivo com a função de segurança
 	//Path da pasta do arquivo com a função de verificação. Ela receberá como parâmetro:
-	//req e qual tipo de operacao está sendo chamado ("POST", "GET", "DELETE", "PATCH", "LIST")
+	//resultado, req, qual tipo de operacao está sendo chamado ("POST", "GET", "DELETE", "PATCH", "LIST")
 	//Deve retornar o que se está autorizado ou não.
 	//Se security não for especificado, o crud retornará normalmente
 	"security": "PATH ABSOLUTO PARA ARQUIVO COM A FUNCAO DE SEGURANÇA"
