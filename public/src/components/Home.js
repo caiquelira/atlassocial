@@ -10,8 +10,6 @@ import Layer from 'grommet/components/Layer';
 import Button from 'grommet/components/Button';
 import LoginForm from 'grommet/components/LoginForm';
 
-import $ from 'jquery';
-
 export default class Home extends React.Component {
 
   constructor(props) {
