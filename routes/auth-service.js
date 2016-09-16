@@ -10,6 +10,10 @@ module.exports = function(app){
 
 	app.get('/login/facebook/return', 
 		passport.authenticate('facebook', { failureRedirect: '/login' }), function(req, res) {
-			res.redirect('/teste');
+		var response = {
+			"id": req.user.userID,
+			"firstTime": req.user.firstTime
+		};
+		res.json(response);
 	});
 }
