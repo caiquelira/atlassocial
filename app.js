@@ -9,7 +9,9 @@ var session = require('express-session');
 
 //Configuring routes (APIs)
 var routes = require('./routes/index');
-var authService = require('./routes/auth-service');
+var authService = require('./routes/services/auth-service');
+
+//var passport = require('./passportConfig')
 var Usuario = require('./models/usuario');
 
 //Authentication
@@ -62,7 +64,7 @@ passport.use(new Strategy({
 	clientID: "181579062250918",
 	clientSecret: "d522dffb41d5f912c9d5734a1149b28a",
 	//Need authorization at developers.facebook.com
-	callbackURL: "http://localhost:8080/login/facebook/return"
+	callbackURL: "http://localhost:8080/auth-service/login/facebook/return"
 },
 	function(accessToken, refreshToken, profile, done) {
 		//See if someone has this ID.
@@ -71,7 +73,7 @@ passport.use(new Strategy({
 		query['auth.platform'] = profile.provider;
 		query['auth.password'] = "";
 		Usuario.findOne(query).then( function(object) {
-			//Se não achou, constroi um novo
+			//If it don't, we construct a new object
 			if (object == null){
 				var newUser = new Usuario();
 				newUser.name = profile.displayName;
@@ -80,6 +82,7 @@ passport.use(new Strategy({
 					'platform': profile.provider,
 					'password': ""
 				};
+				//Saving newUser
 				newUser.save(function(err, saved) {
 					if(err){
 						console.log(err);
@@ -88,6 +91,7 @@ passport.use(new Strategy({
 						console.log('Usuario salvo! \n', newUser);
 					}
 				}).then( function(object){
+					//Passing userID and firstTime bool along
 					profile.userID = newUser._id;
 					profile.firstTime = true;
 					return done(null, profile);

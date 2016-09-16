@@ -50,59 +50,99 @@ function findObject(Model, param, uniqueIdentifier, cb){
 	}
 }
 
-module.exports = function(router, route, Model, config) {
+module.exports = function(router, route, ModelPath, config) {
 	
+	//Initial configurations
+	var Model = require(ModelPath);
+	var securityFilter;
+	if (_.isUndefined(config.security)){
+		securityFilter = function(req, MethodType){
+			return true;
+		}
+	}
+	else{
+		securityFilter = require(config.security);
+	}
+
 	//LIST
 	router.get(route, function(req, res) {
-		Model.find(function(err, objects) {
-		  if (err)
-			  res.send(err);
+		if (securityFilter(req, "LIST")){
+			Model.find(function(err, objects) {
+			if (err)
+				res.send(err);
 
-		  res.json(objects);
-
-		});
+			res.json(objects);
+			});
+		}
+		else{
+			res.status(403);
+			res.send('Acesso não autorizado');
+		} 
 	});
 
 	//CREATE
 	router.post(route, function(req, res) {
-
-		var object = new Model();
-
-		object = readRequest(object, Model, req);
-
-		saveModel(object, res);
-
+		if (securityFilter(req, "POST")){
+			var object = new Model();
+		
+			object = readRequest(object, Model, req);
+		
+			saveModel(object, res);
+		}
+		else{
+			res.status(403);
+			res.send('Acesso não autorizado');
+		}
 	});
 	
 	//READ
 	router.get(route + '/:UniqueIdentifier', function(req, res){
-		findObject(Model, req.params.UniqueIdentifier, config.uniqueIdentifier, function(object){	
+		
+		if (securityFilter(req, "GET")){
+			findObject(Model, req.params.UniqueIdentifier, config.uniqueIdentifier, function(object){	
 			res.send(object);	
-		});	
+			});	
+		}
+		else{
+			res.status(403);
+			res.send('Acesso não autorizado');
+		}
 	});
 
 	//UPDATE
 	router.patch(route + '/:UniqueIdentifier', function(req, res){
-		
-		findObject(Model, req.params.UniqueIdentifier, config.uniqueIdentifier, function(object){
-			object = readRequest(object, Model, req);
-			saveModel(object, res);
-		});	
+		if (securityFilter(req, "PATCH")){
+			findObject(Model, req.params.UniqueIdentifier, config.uniqueIdentifier, function(object){
+				object = readRequest(object, Model, req);
+				saveModel(object, res);
+			});
+		}
+		else{
+			res.status(403);
+			res.send('Acesso não autorizado');
+		}	
 	});
 
 	//DELETE
 	router.delete(route + '/:UniqueIdentifier', function(req,res){
 
-		findObject(Model, req.params.UniqueIdentifier, config.uniqueIdentifier, function(object){
-			object.remove(function(err) {
-				if(err) {
-					res.json({ERROR: err});
-				}
-				else {
-					res.json({DELETED: object});
-				}
-			});
-		});
+		if (securityFilter(req, "DELETE")){
+				findObject(Model, req.params.UniqueIdentifier, config.uniqueIdentifier, function(object){
+					object.remove(function(err) {
+						if(err) {
+							res.json({ERROR: err});
+						}
+						else {
+							res.json({DELETED: object});
+						}
+					});
+				});
+		}
+		else{
+			res.status(403);
+			res.send('Acesso não autorizado');
+		}
+
 	});
 
 	return router;

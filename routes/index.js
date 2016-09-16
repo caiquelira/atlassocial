@@ -4,23 +4,32 @@ var _ = require('lodash');
 
 
 var crud = require('./crud');
-var apiDefinition = require('./')
 var router = Express.Router();
 
-//Schemas
-var Sensor = require('../models/sensor');
-var Usuario = require('../models/usuario');
+
+/*config:{
+	//Se quiser pesquisar por outro uniqueID do objeto
+	"uniqueID": "NameOfSchemaAttribute"
+	//Segurança. Pode passar um arquivo com a função de segurança
+	//Path da pasta do arquivo com a função de verificação. Ela receberá como parâmetro:
+	//req e qual tipo de operacao está sendo chamado ("POST", "GET", "DELETE", "PATCH", "LIST")
+	//Deve retornar o que se está autorizado ou não.
+	//Se security não for especificado, o crud retornará normalmente
+	"security": "PATH PARA ARQUIVO COM A FUNCAO DE SEGURANÇA"
+	}
+}
+*/
 
 var apiDefinition = [
 	{	
 		"route": "/sensores",
-		"model": require('../models/sensor'),
+		"model": '../models/sensor',
 		"config": {}
 	},
 	{
 		"route": "/usuarios",
-		"model": require('../models/usuario'),
-		"config": {}		
+		"model": '../models/usuario',
+		"config": {"security": "./security/defaultSecurity"}		
 	}
 ];
 
