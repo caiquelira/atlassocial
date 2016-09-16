@@ -25,9 +25,10 @@ var router = Express.Router();
 
 //Database settings
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://127.0.0.1/Yano');/*,function(){
-	mongoose.connection.db.dropDatabase();
- });*/
+//mongoose.connect('mongodb://127.0.0.1/Yano');
+mongoose.connect('mongodb://<dbuser>:<dbpassword>@ds033076.mlab.com:33076/atlassocial_dev');
+
+
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
@@ -64,8 +65,8 @@ passport.use(new Strategy({
 	clientID: "181579062250918",
 	clientSecret: "d522dffb41d5f912c9d5734a1149b28a",
 	//Need authorization at developers.facebook.com
-	//callbackURL: "http://localhost:8080/auth-service/login/facebook/return"
-	callbackURL: "http://atlassocial.herokuapp.com/auth-service/login/facebook/return"
+	callbackURL: "http://localhost:8080/auth-service/login/facebook/return"
+	//callbackURL: "http://atlassocial.herokuapp.com/auth-service/login/facebook/return"
 },
 	function(accessToken, refreshToken, profile, done) {
 		//See if someone has this ID.
