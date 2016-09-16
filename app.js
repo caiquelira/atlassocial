@@ -10,6 +10,7 @@ var session = require('express-session');
 //Configuring routes (APIs)
 var routes = require('./routes/index');
 var authService = require('./routes/auth-service');
+var Usuario = require('./models/usuario');
 
 //Authentication
 var passport = require('passport');
@@ -41,9 +42,7 @@ app.use(Express.static(__dirname + '/views'));
 app.use(Express.static(__dirname + '/public'));
 
 //Logger
-app.use(logger('dev'));/*
-app.use(morgan('combined'));
-*///Passing cookie
+app.use(logger('dev'));
 app.use(cookieParser());
 app.use(session({ secret: 'vilaSTF111', resave: true, saveUninitialized: true }));
 app.use(bodyParser.json());
@@ -66,7 +65,38 @@ passport.use(new Strategy({
 	callbackURL: "http://localhost:8080/login/facebook/return"
 },
 	function(accessToken, refreshToken, profile, done) {
-		return done(null, profile);
+		//See if someone has this ID.
+		var query = {};
+		query['auth.id'] = profile.id;
+		query['auth.platform'] = profile.provider;
+		query['auth.password'] = "";
+		Usuario.findOne(query).then( function(object) {
+			//Se não achou, constroi um novo
+			if (object == null){
+				var newUser = new Usuario();
+				newUser.name = profile.displayName;
+				newUser.auth = {
+					'id': profile.id,
+					'platform': profile.provider,
+					'password': ""
+				};
+				newUser.save(function(err, saved) {
+					if(err){
+						console.log(err);
+					}
+					else {
+						console.log('Usuario salvo! \n', newUser);
+					}
+				}).then( function(object){
+					profile.userID = newUser._id;
+					profile.firstTime = true;
+					return done(null, profile);
+				});	
+			}
+			profile.userID = object._id;
+			profile.firstTime = false; 		
+			return done(null, profile);
+		});
 	}
 ));
 
@@ -95,8 +125,6 @@ authService(app);
 
 // Debug React
 if (process.env.NODE_ENV && process.env.NODE_ENV.trim() === 'react') {
-	console.log("oi peh")
-
 	var webpack = require("webpack");
 	var config = require("./webpack.config.dev");
 	var compiler = webpack(config);

@@ -14,17 +14,19 @@ var Usuario = require('../models/usuario');
 var apiDefinition = [
 	{	
 		"route": "/sensores",
-		"model": require('../models/sensor')
+		"model": require('../models/sensor'),
+		"config": {}
 	},
 	{
 		"route": "/usuarios",
-		"model": require('../models/usuario')		
+		"model": require('../models/usuario'),
+		"config": {}		
 	}
 ];
 
 
 _.forEach(apiDefinition, function(api){
-	crud(router, api.route, api.model);
+	crud(router, api.route, api.model, api.config);
 });
 
 module.exports = router;

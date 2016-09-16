@@ -33,32 +33,34 @@ function findObject(Model, param, uniqueIdentifier, cb){
 	if (_.isUndefined(uniqueIdentifier)){
 		Model.findById(param, function(err, object){
 			if (err)
-              res.send(err);
+			  res.send(err);
 
 			cb(object);
 		});
 	}
 	else{
-		Model.findOne({uniqueIdentifier: param}, function(err, object){
+		var query = {};
+		query[uniqueIdentifier] = param;
+		Model.findOne(query, function(err, object){
 			if (err)
-              res.send(err);
+			  res.send(err);
 
 			cb(object);
 		});
 	}
 }
 
-module.exports = function(router, route, Model, uniqueIdentifier) {
+module.exports = function(router, route, Model, config) {
 	
 	//LIST
 	router.get(route, function(req, res) {
-        Model.find(function(err, objects) {
-          if (err)
-              res.send(err);
+		Model.find(function(err, objects) {
+		  if (err)
+			  res.send(err);
 
-          res.json(objects);
+		  res.json(objects);
 
-        });
+		});
 	});
 
 	//CREATE
@@ -74,7 +76,7 @@ module.exports = function(router, route, Model, uniqueIdentifier) {
 	
 	//READ
 	router.get(route + '/:UniqueIdentifier', function(req, res){
-		findObject(Model, req.params.UniqueIdentifier, uniqueIdentifier, function(object){	
+		findObject(Model, req.params.UniqueIdentifier, config.uniqueIdentifier, function(object){	
 			res.send(object);	
 		});	
 	});
@@ -82,7 +84,7 @@ module.exports = function(router, route, Model, uniqueIdentifier) {
 	//UPDATE
 	router.patch(route + '/:UniqueIdentifier', function(req, res){
 		
-		findObject(Model, req.params.UniqueIdentifier, uniqueIdentifier, function(object){
+		findObject(Model, req.params.UniqueIdentifier, config.uniqueIdentifier, function(object){
 			object = readRequest(object, Model, req);
 			saveModel(object, res);
 		});	
@@ -91,7 +93,7 @@ module.exports = function(router, route, Model, uniqueIdentifier) {
 	//DELETE
 	router.delete(route + '/:UniqueIdentifier', function(req,res){
 
-		findObject(Model, req.params.UniqueIdentifier, uniqueIdentifier, function(object){
+		findObject(Model, req.params.UniqueIdentifier, config.uniqueIdentifier, function(object){
 			object.remove(function(err) {
 				if(err) {
 					res.json({ERROR: err});

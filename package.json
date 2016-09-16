@@ -8,7 +8,7 @@
     "clean": "rm -rf ./public/build",
     "build:dev": "webpack --progress --colors --config webpack.config.dev.js ",
     "build:prod": "NODE_ENV=production webpack --progress --colors --config webpack.config.prod.js",
-    "build": "run npm clean && npm run build:dev",
+    "build": "npm run clean && npm run build:dev",
     "postinstall": "npm run clean && npm run build:prod",
     "react": "set NODE_ENV=react && node app.js",
     "start": "node app.js"
