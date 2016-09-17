@@ -1,5 +1,8 @@
 //sets the current environment
-if (!process.env.NODE_ENV) {
+if(process.env.NODE_ENV == "production") {
+	console.log("Environment: ", process.env.NODE_ENV);
+}
+else {
 	console.log("Environment: Development");
     process.env.NODE_ENV = "development";
 }
@@ -23,6 +26,8 @@ process.env.BASE_URL = config.base_url[process.env.NODE_ENV];
 console.log("Base URL: ", process.env.BASE_URL);
 /*-----------------------------------------------------------------------------*/
 
+
+//NPM packages
 var Express = require('express');
 var _ = require ("underscore");
 var bodyParser = require ("body-parser");
@@ -34,15 +39,12 @@ var session = require('express-session');
 
 //Configuring routes (APIs)
 var routes = require('./routes/index');
-var authService = require('./routes/services/auth-service');
+var facebookAuthService = require('./routes/services/facebook-auth-service');
 
 //var passport = require('./passportConfig')
-var Usuario = require('./models/usuario');
 
 //Authentication
 var passport = require('passport');
-var Strategy = require('passport-facebook').Strategy;
-
 
 //Setting up the app
 var app = new Express();
@@ -84,49 +86,7 @@ app.use(function(req, res, next) {
 app.set('view engine', 'ejs');
 
 //Configuring Facebook Auth
-passport.use(new Strategy({
-	clientID: "181579062250918",
-	clientSecret: "d522dffb41d5f912c9d5734a1149b28a",
-	//Need authorization at developers.facebook.com
-	callbackURL: process.env.BASE_URL + "/auth-service/login/facebook/return"
-},
-	function(accessToken, refreshToken, profile, done) {
-		//See if someone has this ID.
-		var query = {};
-		query['auth.id'] = profile.id;
-		query['auth.platform'] = profile.provider;
-		query['auth.password'] = "";
-		Usuario.findOne(query).then( function(object) {
-			//If it don't, we construct a new object
-			if (object == null){
-				var newUser = new Usuario();
-				newUser.name = profile.displayName;
-				newUser.auth = {
-					'id': profile.id,
-					'platform': profile.provider,
-					'password': ""
-				};
-				//Saving newUser
-				newUser.save(function(err, saved) {
-					if(err){
-						console.log(err);
-					}
-					else {
-						console.log('Usuario salvo! \n', newUser);
-					}
-				}).then( function(object){
-					//Passing userID and firstTime bool along
-					profile.userID = newUser._id;
-					profile.firstTime = true;
-					return done(null, profile);
-				});	
-			}
-			profile.userID = object._id;
-			profile.firstTime = false; 		
-			return done(null, profile);
-		});
-	}
-));
+passport = facebookAuthService.strategy_config(passport);
 
 // Initialize Passport and restore authentication state, if any, from the
 // session.
@@ -149,7 +109,7 @@ app.get('/teste', function(req, res) {
 });
 
 //Configurating auth-service
-authService(app);
+facebookAuthService.routes(app);
 
 // Debug React
 if (process.env.NODE_ENV && process.env.NODE_ENV.trim() === 'react') {
