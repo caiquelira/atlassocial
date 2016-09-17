@@ -1,3 +1,28 @@
+//sets the current environment
+if (!process.env.NODE_ENV) {
+	console.log("Environment: Development");
+    process.env.NODE_ENV = "development";
+}
+
+config = {
+	"database":
+	{
+	    "development": "mongodb://atlasadmin:atlasadmin@ds033076.mlab.com:33076/atlassocial_dev",
+	    "production": "mongodb://atlasadmin:atlasadmin@ds033076.mlab.com:33076/atlassocial_dev"
+	},
+	"base_url":
+	{
+	    "development": "http://localhost:8080",
+	    "production": "http://atlassocial.herokuapp.com"
+	}
+};
+
+process.env.DATABASE_URL = config.database[process.env.NODE_ENV];
+console.log("Database: ", process.env.DATABASE_URL)
+process.env.BASE_URL = config.base_url[process.env.NODE_ENV];
+console.log("Base URL: ", process.env.BASE_URL);
+/*-----------------------------------------------------------------------------*/
+
 var Express = require('express');
 var _ = require ("underscore");
 var bodyParser = require ("body-parser");
@@ -25,9 +50,7 @@ var router = Express.Router();
 
 //Database settings
 mongoose.Promise = global.Promise;
-//mongoose.connect('mongodb://127.0.0.1/Yano');
-mongoose.connect('mongodb://atlasadmin:atlasadmin@ds033076.mlab.com:33076/atlassocial_dev');
-
+mongoose.connect(process.env.DATABASE_URL);
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -65,8 +88,7 @@ passport.use(new Strategy({
 	clientID: "181579062250918",
 	clientSecret: "d522dffb41d5f912c9d5734a1149b28a",
 	//Need authorization at developers.facebook.com
-	//callbackURL: "http://localhost:8080/auth-service/login/facebook/return"
-	callbackURL: "http://atlassocial.herokuapp.com/auth-service/login/facebook/return"
+	callbackURL: process.env.BASE_URL + "/auth-service/login/facebook/return"
 },
 	function(accessToken, refreshToken, profile, done) {
 		//See if someone has this ID.

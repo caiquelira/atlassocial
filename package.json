@@ -11,7 +11,8 @@
     "build": "npm run clean && npm run build:dev",
     "postinstall": "npm run clean && npm run build:prod",
     "react": "rm -rf ./public/build && set NODE_ENV=react && node app.js",
-    "start": "node app.js"
+    "start": "node app.js",
+    "start_prod": "set NODE_ENV=production&&node index.js"
   },
   "repository": {
     "type": "git",
