@@ -1,10 +1,11 @@
 //sets the current environment
+var node_env = process.env.NODE_ENV;
 if(process.env.NODE_ENV == "production") {
 	console.log("Environment: ", process.env.NODE_ENV);
 }
 else {
 	console.log("Environment: Development");
-    process.env.NODE_ENV = "development";
+    node_env = "development";
 }
 
 config = {
@@ -20,9 +21,9 @@ config = {
 	}
 };
 
-process.env.DATABASE_URL = config.database[process.env.NODE_ENV];
+process.env.DATABASE_URL = config.database[node_env];
 console.log("Database: ", process.env.DATABASE_URL)
-process.env.BASE_URL = config.base_url[process.env.NODE_ENV];
+process.env.BASE_URL = config.base_url[node_env];
 console.log("Base URL: ", process.env.BASE_URL);
 /*-----------------------------------------------------------------------------*/
 
@@ -113,6 +114,7 @@ facebookAuthService.routes(app);
 
 // Debug React
 if (process.env.NODE_ENV && process.env.NODE_ENV.trim() === 'react') {
+	console.log("Initializing Webpack.");
 	var webpack = require("webpack");
 	var config = require("./webpack.config.dev");
 	var compiler = webpack(config);
