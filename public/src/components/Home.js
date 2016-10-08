@@ -14,6 +14,7 @@ import Layer from 'grommet/components/Layer';
 import Button from 'grommet/components/Button';
 import LoginForm from 'grommet/components/LoginForm';
 import Box from 'grommet/components/Box';
+import { FormattedMessage } from 'react-intl';
 
 export default class Home extends React.Component {
 
@@ -52,21 +53,21 @@ export default class Home extends React.Component {
       <App centered={false}>
         <Header direction="row" justify="between" large={true} pad={{horizontal: 'medium'}}>
           <Title>Atlas</Title>
-          <Button label="Login" primary={true} onClick={this.toggleLoginLayer.bind(this)} />
+          <Button label={<FormattedMessage id="Entrar"/>} primary={true} onClick={this.toggleLoginLayer.bind(this)} />
           { this.state.showLogin ? this.login : null }
         </Header>
         <Hero colorIndex="brand" size="small">
-            <h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h1>
+            <h1><FormattedMessage id="Lorem Ipsum"/></h1>
         </Hero>
         <Box direction="row">
           <Box size="medium" basis="1/2" pad="medium" align="center" justify="center">
             <Box size="medium" pad="large" align="center" justify="center" textAlign="center" colorIndex="neutral-6">
-                <Button onClick={this.box.bind(this)} label={<h1>Tenho Uma Ideia!</h1>}/>
+                <Button onClick={this.box.bind(this)} label={<h1><FormattedMessage id="Tenho Uma Ideia" /></h1>}/>
             </Box>
           </Box>
           <Box size="medium" basis="1/2" pad="medium" align="center" justify="center">
             <Box size="medium" pad="large" align="center" justify="center" textAlign="center" colorIndex="neutral-6">
-                <Button onClick={this.box.bind(this)} label={<h1>Procuro Um Projeto!</h1>}/>
+                <Button onClick={this.box.bind(this)} label={<h1><FormattedMessage id="Procuro Um Projeto" /></h1>}/>
             </Box>
           </Box>
         </Box>
