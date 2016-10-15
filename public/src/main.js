@@ -5,10 +5,8 @@ import ReactDOM from "react-dom";
 
 import { Router, Route, hashHistory } from 'react-router';
 
-import App from 'grommet/components/App';
 import Home from './components/Home';
 import Project from './components/Project';
-import LoginLayer from './components/LoginLayer';
 
 // Localization
 import { IntlProvider, addLocaleData } from 'react-intl';
