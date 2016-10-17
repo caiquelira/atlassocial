@@ -16,7 +16,10 @@ export default class LoginMenu extends React.Component {
     }
 
     _login() {
-        alert("clicou");
+        var myWindow = window.open('http://localhost:8080/auth-service/login/Facebook', "", "width=600,height=400");
+        this.setState({
+            loggedIn: !this.state.loggedIn
+        });
     }
 
     render () {
@@ -34,7 +37,7 @@ export default class LoginMenu extends React.Component {
               <Anchor href="#" className="active">
                 <FormattedMessage id="user.edit" />
               </Anchor>
-              <Anchor href="#">
+              <Anchor href="#" onClick={this._login}>
                 <FormattedMessage id="user.logout" />
               </Anchor>
             </Menu>);
