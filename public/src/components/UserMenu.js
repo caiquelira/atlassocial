@@ -37,7 +37,7 @@ export default class LoginMenu extends React.Component {
               <Anchor href="#" className="active">
                 <FormattedMessage id="user.edit" />
               </Anchor>
-              <Anchor href="#" onClick={this._login}>
+              <Anchor href="#" onClick={this._login}>       
                 <FormattedMessage id="user.logout" />
               </Anchor>
             </Menu>);

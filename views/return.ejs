@@ -1,0 +1,14 @@
+<script type="text/javascript">
+
+	var responseData = <%-JSON.stringify(responseData)%>;
+	function WindowCloseItself() {
+		try {
+			window.close();
+			window.opener.HandlePopupResult(responseData);
+		}
+		catch (err) {console.log(err)}
+		return false;
+	}
+	
+	window.onpaint = WindowCloseItself();
+</script>

@@ -11,7 +11,7 @@ module.exports = {
 			res.render('login');
 		});
 
-		app.get('/auth-service/login/facebook', passport.authenticate('facebook'));
+		app.get('/auth-service/login/facebook', passport.authenticate('facebook', {'display': 'popup'}));
 
 		app.get('/auth-service/login/facebook/return', 
 			passport.authenticate('facebook'), function(req, res) {
@@ -29,7 +29,7 @@ module.exports = {
 				"firstTime": firstTime
 			};
 			
-			res.json(response);
+			res.render('return', {responseData: response});
 		});
 	},
 	strategy_config: function(passport){
