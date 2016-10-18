@@ -3,10 +3,7 @@ import 'grommet/grommet-hpe.min.css';
 import React from "react";
 import ReactDOM from "react-dom";
 
-import { Router, Route, hashHistory } from 'react-router';
-
-import Home from './components/Home';
-import Project from './components/Project';
+import Routes from './components/Routes';
 
 // Localization
 import { IntlProvider, addLocaleData } from 'react-intl';
@@ -25,21 +22,13 @@ try {
 }
 const localeData = getLocaleData(messages, locale);
 
-
 let element = document.getElementById('content');
 
-//ReactDOM.render(React.createElement(Home), element);
 
 ReactDOM.render((
     <IntlProvider locale={localeData.locale} messages={localeData.messages}>
-      <Router history={hashHistory}>
-        <Route path="/" component={Home}/>
-        <Route path="/project" component={Project}/>
-      </Router>
+        <Routes />
     </IntlProvider>
 ), element);
 
-
-
-      // <Route path="*" component={NoMatch}/>
 document.body.classList.remove('loading');
