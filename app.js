@@ -1,5 +1,6 @@
 //sets the current environment
 var node_env = process.env.NODE_ENV;
+
 if(process.env.NODE_ENV == "production") {
 	console.log("Environment: ", process.env.NODE_ENV);
 }
@@ -106,6 +107,7 @@ passport.deserializeUser(function(obj, done) {
 
 //Home
 app.get('/teste', function(req, res) {
+	console.log(req.session)
 	res.render('home', { user: req.user });
 });
 

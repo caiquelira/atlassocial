@@ -8,9 +8,9 @@ var router = Express.Router();
 
 
 /*config:{
-	//Se quiser pesquisar por outro uniqueID do objeto
+	//Se quiser pesquisar por outro uniqueIdentifier do objeto
 	//Se não passar, todo o crud será feito procurando pelo id dado pela DB 
-	"uniqueID": "NameOfSchemaAttribute"
+	"uniqueIdentifier": "NameOfSchemaAttribute"
 	//Segurança. Pode passar um arquivo com a função de segurança
 	//Path da pasta do arquivo com a função de verificação. Ela receberá como parâmetro:
 	//resultado, req, qual tipo de operacao está sendo chamado ("POST", "GET", "DELETE", "PATCH", "LIST")
@@ -25,7 +25,7 @@ var apiDefinition = [
 	{	
 		"route": "/sensores",
 		"model": '../models/sensor',
-		"config": {}
+		"config": {"uniqueIdentifier": "alias"}
 	},
 	{
 		"route": "/usuarios",
@@ -38,5 +38,7 @@ var apiDefinition = [
 _.forEach(apiDefinition, function(api){
 	crud(router, api.route, api.model, api.config);
 });
+
+
 
 module.exports = router;
