@@ -16,7 +16,12 @@ export default class LoginMenu extends React.Component {
     }
 
     _login() {
-        var myWindow = window.open('http://localhost:8080/auth-service/login/Facebook', "", "width=900,height=600");
+        var myWindow = window.open('http://localhost:8080/auth-service/login/Facebook', "", "width=600,height=400");
+        
+        myWindow.onunload = function(){
+            console.log(myWindow)
+            console.log(myWindow.responseData);
+        }
         this.setState({
             loggedIn: !this.state.loggedIn
         });
