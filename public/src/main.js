@@ -2,11 +2,13 @@ import 'grommet/grommet-hpe.min.css';
 
 import React from "react";
 import ReactDOM from "react-dom";
+import * as Redux from 'redux';
+import { Provider, intlReducer } from 'react-intl-redux';
 
 import Routes from './components/Routes';
 
 // Localization
-import { IntlProvider, addLocaleData } from 'react-intl';
+import { addLocaleData } from 'react-intl';
 import { getCurrentLocale, getLocaleData } from 'grommet/utils/Locale';
 const locale = getCurrentLocale();
 import pt from 'react-intl/locale-data/pt';
@@ -24,11 +26,22 @@ const localeData = getLocaleData(messages, locale);
 
 let element = document.getElementById('content');
 
+// Redux
+const reducer = Redux.combineReducers({
+    intl: intlReducer
+});
+const initialState = {
+    intl: {
+        locale: localeData.locale,
+        messages: localeData.messages
+    }
+};
+const store = Redux.createStore(reducer, initialState);
 
 ReactDOM.render((
-    <IntlProvider locale={localeData.locale} messages={localeData.messages}>
+    <Provider store={store}>
         <Routes />
-    </IntlProvider>
+    </Provider>
 ), element);
 
 document.body.classList.remove('loading');

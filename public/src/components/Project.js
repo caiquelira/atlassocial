@@ -1,15 +1,15 @@
 import React from "react";
 
-import App from "grommet/components/App"
-import Box from "grommet/components/Box"
-import Button from "grommet/components/Button"
-import Header from "grommet/components/Header"
-import Label from "grommet/components/Label"
-import Paragraph from "grommet/components/Paragraph"
-import Title from "grommet/components/Title"
-import Tile from "grommet/components/Tile"
-import Tiles from "grommet/components/Tiles"
-import Value from "grommet/components/Tiles"
+import App from "grommet/components/App";
+import Box from "grommet/components/Box";
+import Button from "grommet/components/Button";
+import Header from "grommet/components/Header";
+import Label from "grommet/components/Label";
+import Paragraph from "grommet/components/Paragraph";
+import Title from "grommet/components/Title";
+import Tile from "grommet/components/Tile";
+import Tiles from "grommet/components/Tiles";
+import Value from "grommet/components/Tiles";
 
 export default class Project extends React.Component {
 

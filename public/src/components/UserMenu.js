@@ -18,10 +18,10 @@ export default class LoginMenu extends React.Component {
     _login() {
         var myWindow = window.open('http://localhost:8080/auth-service/login/Facebook', "", "width=600,height=400");
         
-        myWindow.onunload = function(){
-            console.log(myWindow)
+        myWindow.onunload = function() {
+            console.log(myWindow);
             console.log(myWindow.responseData);
-        }
+        };
         this.setState({
             loggedIn: !this.state.loggedIn
         });
@@ -35,16 +35,16 @@ export default class LoginMenu extends React.Component {
                 primary={true}
                 onClick={this._login} />);
         
-        const thumbNail = (<Image src="../../img/user.png" size="thumb" />);
+        const thumbNail = (<Image src="../img/user.png" size="thumb" />);
 
         const userMenu = (
             <Menu icon={thumbNail} label="Lucas Müller">
-              <Anchor href="#" className="active">
-                <FormattedMessage id="user.edit" />
-              </Anchor>
-              <Anchor href="#" onClick={this._login}>       
-                <FormattedMessage id="user.logout" />
-              </Anchor>
+                <Anchor href="#" className="active">
+                    <FormattedMessage id="user.edit" />
+                </Anchor>
+                <Anchor href="#" onClick={this._login}>       
+                    <FormattedMessage id="user.logout" />
+                </Anchor>
             </Menu>);
 
         return this.state.loggedIn ? userMenu : loginButton;

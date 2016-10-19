@@ -2,7 +2,6 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-    devtool: 'source-map',
     entry: [
         './public/src/main.js'
     ],
@@ -10,18 +9,22 @@ module.exports = {
         path: path.join(__dirname, 'public/build'),
         filename: 'bundle.js'
     },
+    resolve: {
+      root: path.resolve("./public/src"),
+      extensions: ['', '.js', '.scss', '.css']
+    },
     plugins: [
-        new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.DefinePlugin({
-            'process.env': {
-                'NODE_ENV': JSON.stringify('production')
-            }
-        }),
-        new webpack.optimize.UglifyJsPlugin({
-            compressor: {
-                warnings: false
-            }
-        })
+      new webpack.optimize.OccurrenceOrderPlugin(),
+      new webpack.DefinePlugin({
+        'process.env': {
+          'NODE_ENV': JSON.stringify('production')
+        }
+      }),
+      new webpack.optimize.UglifyJsPlugin({
+        compressor: {
+          warnings: false
+        }
+      })
     ],
     module: {
       loaders: [

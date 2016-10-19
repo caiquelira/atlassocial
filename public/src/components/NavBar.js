@@ -3,7 +3,7 @@ import React from 'react';
 import Header from 'grommet/components/Header';
 import Title from 'grommet/components/Title';
 
-import UserMenu from './UserMenu';
+import UserMenu from 'components/UserMenu';
 
 export default class NavBar extends React.Component {
 

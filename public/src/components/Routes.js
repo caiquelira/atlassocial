@@ -2,9 +2,9 @@ import React from 'react';
 
 import { Router, Route, hashHistory } from 'react-router';
 
-import Home from './Home';
-import LoginRequired from './LoginRequired';
-import Project from './Project';
+import Home          from 'components/Home';
+import LoginRequired from 'components/LoginRequired';
+import Project       from 'components/Project';
 
 export default class Routes extends React.Component {
 

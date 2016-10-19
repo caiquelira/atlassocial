@@ -1,6 +1,6 @@
 import React from 'react';
 
-import LoginLayer from './LoginLayer';
+import LoginLayer from 'components/LoginLayer';
 
 export default function LoginRequired(WrappedComponent) {
 

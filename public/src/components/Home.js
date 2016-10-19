@@ -8,8 +8,8 @@ import App from 'grommet/components/App';
 import Article from 'grommet/components/Article';
 import Hero from 'grommet/components/Hero';
 
-import NavBar from './NavBar';
-import AtlasFooter from './AtlasFooter';
+import NavBar from 'components/NavBar';
+import AtlasFooter from 'components/AtlasFooter';
 
 export default class Home extends React.Component {
 

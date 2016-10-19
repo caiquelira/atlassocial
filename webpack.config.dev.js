@@ -15,10 +15,10 @@ module.exports = {
   // assumes all JavaScript files you edit will be in src/
   // when importing from src/<file>.js, only need to specify as <file>
   resolve: {
-    root: path.resolve("./src"), // must be absolute path
+    root: path.resolve("./public/src"), // must be absolute path
     extensions: ['', '.js', '.scss', '.css']
   },
-  devtool: "cheap-module-eval-source-map", // source maps to ease debugging
+  devtool: "source-map", // source maps to ease debugging
   module: {
     loaders: [
       {
