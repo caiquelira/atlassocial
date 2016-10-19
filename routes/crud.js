@@ -34,7 +34,7 @@ function findObject(Model, param, uniqueIdentifier, res, cb){
 		Model.findById(param, function(err, object){
 			if (err)
 			  res.send(err);
-
+		
 			cb(object);
 		});
 	}
@@ -49,6 +49,14 @@ function findObject(Model, param, uniqueIdentifier, res, cb){
 		});
 	}
 }
+
+
+function findObjectsByQuery(Model, query, res, cb){
+	var stream = Model.find(query)
+}
+
+
+
 
 module.exports = function(router, route, ModelPath, config) {
 	
@@ -66,20 +74,18 @@ module.exports = function(router, route, ModelPath, config) {
 
 	//LIST
 	router.get(route, function(req, res) {
-		Model.find(function(err, objects) {
+		Model.find(req.query, function(err, objects) {
 			if (securityFilter(objects, req, "LIST")){
 				if (err)
 					res.send(err);
-
 				res.json(objects);
-			}
-			else {
-				res.status(403);
-				res.send('Acesso não autorizado');
-			}
+				}
+				else {
+					res.status(403);
+					res.send('Acesso não autorizado');
+				}
 		});
 	});
-
 	//CREATE
 	router.post(route, function(req, res) {
 	
@@ -128,7 +134,7 @@ module.exports = function(router, route, ModelPath, config) {
 	//DELETE
 	router.delete(route + '/:UniqueIdentifier', function(req,res){
 		findObject(Model, req.params.UniqueIdentifier, config.uniqueIdentifier, res, function(object){
-			if (securityFilter(req, "DELETE")){
+			if (securityFilter(object, req, "DELETE")){
 				object.remove(function(err) {
 					if(err) {
 						res.json({ERROR: err});
