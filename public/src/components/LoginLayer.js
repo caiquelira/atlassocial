@@ -1,6 +1,6 @@
-import React from 'react';
-
+import React                from 'react';
 import { FormattedMessage } from 'react-intl';
+import Config               from 'Config';
 
 import Box     from 'grommet/components/Box';
 import Button  from 'grommet/components/Button';
@@ -10,22 +10,28 @@ import Section from 'grommet/components/Section';
 
 // TODO: Review Icons (was not updated)
 import FacebookIcon from 'grommet/components/icons/base/SocialFacebook';
-import GoogleIcon from 'grommet/components/icons/base/SocialGoogle';
-import EmailIcon from 'grommet/components/icons/base/SocialEmail';
+import GoogleIcon   from 'grommet/components/icons/base/SocialGoogle';
+import EmailIcon    from 'grommet/components/icons/base/SocialEmail';
 
-const OPTIONS = [{ type:"facebook", text: "login.facebook", icon: (<FacebookIcon />)},
-                 { type:"google", text: "login.google", icon: (<GoogleIcon />)},
-                 { type:"email", text: "login.email", icon: (<EmailIcon />)}];
+const OPTIONS = [ { platform: "facebook" , text: "login.facebook" , icon: (<FacebookIcon /> )},
+                  { platform: "google"   , text: "login.google"   , icon: (<GoogleIcon   /> )},
+                  { platform: "email"    , text: "login.email"    , icon: (<EmailIcon    /> )}];
 
 export default class LoginLayer extends React.Component {
 
-    constructor () {
-        super();
+    constructor (props) {
+        super(props);
         this._login = this._login.bind(this);
     }
 
-    _login(type) {
-        alert("clicou");
+    _login(platform) {
+        var loginPopup = window.open(Config.loginBaseURL + platform, "", "width=600,height=400");
+        loginPopup.onunload = function() {
+            console.log("popup:");
+            console.log(myWindow);
+            console.log("responseData");
+            console.log(myWindow.responseData);
+        };
     }
 
     render () {
@@ -34,15 +40,15 @@ export default class LoginLayer extends React.Component {
         const links = (
             OPTIONS.map(op => ( 
                     <Button
-                    key={op.key}
-                    onClick={() => this._login(op.key)}
+                    key={op.platform}
+                    onClick={() => this._login(op.platform)}
                     icon={op.icon}
                     fill={false}
                     label={<FormattedMessage id={op.text}/>} />
                 )));
 
         let layer = (
-            <Layer closer={true} align="center">
+            <Layer closer={true} align="center" hidden={this.props.hidden} onClose={this.props.onClose}>
                 <Section>
                     <Box pad="medium" justify="start">
                         <Menu inline={true} direction="column">

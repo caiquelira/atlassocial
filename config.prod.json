@@ -1,0 +1,3 @@
+{
+    "loginBaseURL": "http://atlassocial.herokuapp.com/auth-service/login/"
+}

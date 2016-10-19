@@ -12,6 +12,9 @@ module.exports = {
     filename: "bundle.js",
     publicPath: "/build/"
   },
+  externals: {
+    Config: JSON.stringify(require('./config.dev.json'))
+  },
   // assumes all JavaScript files you edit will be in src/
   // when importing from src/<file>.js, only need to specify as <file>
   resolve: {

@@ -2,28 +2,42 @@ import React from 'react';
 
 import {FormattedMessage} from 'react-intl';
 
-import Anchor from 'grommet/components/Anchor';
-import Button from 'grommet/components/Button';
-import Image from 'grommet/components/Image';
-import Menu   from 'grommet/components/Menu';
+import Anchor     from 'grommet/components/Anchor';
+import Button     from 'grommet/components/Button';
+import Image      from 'grommet/components/Image';
+import Menu       from 'grommet/components/Menu';
+
+import LoginLayer from 'components/LoginLayer';
 
 export default class LoginMenu extends React.Component {
 
     constructor () {
         super();
         this._login = this._login.bind(this);
-        this.state = {loggedIn: false};
+        this._logout = this._logout.bind(this);
+        this._closeLoginLayer = this._closeLoginLayer.bind(this);
+        this.state = {
+            loggedIn: false,
+            showLoginLayer: false
+        };
     }
 
     _login() {
-        var myWindow = window.open('http://localhost:8080/auth-service/login/Facebook', "", "width=600,height=400");
-        
-        myWindow.onunload = function() {
-            console.log(myWindow);
-            console.log(myWindow.responseData);
-        };
         this.setState({
-            loggedIn: !this.state.loggedIn
+            showLoginLayer: true
+        });
+    }
+
+    _logout() {
+        e.preventDefault();
+        this.setState({
+            showLoginLayer: false
+        });
+    }
+
+    _closeLoginLayer(e) {
+        this.setState({
+            showLoginLayer: false
         });
     }
 
@@ -39,14 +53,20 @@ export default class LoginMenu extends React.Component {
 
         const userMenu = (
             <Menu icon={thumbNail} label="Lucas Müller">
-                <Anchor href="#" className="active">
+                <Anchor href="#" >
                     <FormattedMessage id="user.edit" />
                 </Anchor>
-                <Anchor href="#" onClick={this._login}>       
+                <Anchor href="#" onClick={this._logout}>       
                     <FormattedMessage id="user.logout" />
                 </Anchor>
             </Menu>);
+        
+        const loginLayer = (<LoginLayer
+                                hidden={!this.state.showLoginLayer}
+                                onClose={this._closeLoginLayer} />);
 
-        return this.state.loggedIn ? userMenu : loginButton;
+        return this.state.loggedIn ?
+            <div>{loginLayer}{userMenu}</div>
+          : <div>{loginLayer}{loginButton}</div>;
     }
 }

@@ -9,6 +9,9 @@ module.exports = {
         path: path.join(__dirname, 'public/build'),
         filename: 'bundle.js'
     },
+    externals: {
+      Config: JSON.stringify(require('./config.prod.json'))
+    },
     resolve: {
       root: path.resolve("./public/src"),
       extensions: ['', '.js', '.scss', '.css']

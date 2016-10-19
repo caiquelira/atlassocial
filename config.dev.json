@@ -1,0 +1,3 @@
+{
+    "loginBaseURL": "http://localhost:8080/auth-service/login/"
+}
