@@ -1,11 +1,12 @@
 import 'grommet/grommet-hpe.min.css';
 
-import React from "react";
-import ReactDOM from "react-dom";
-import * as Redux from 'redux';
-import { Provider, intlReducer } from 'react-intl-redux';
+import React        from "react";
+import ReactDOM     from "react-dom";
+import * as Redux   from 'redux';
+import { Provider } from 'react-intl-redux';
+import mainReducer  from 'reducers/mainReducer';
 
-import Routes from './components/Routes';
+import Routes from 'components/Routes';
 
 // Localization
 import { addLocaleData } from 'react-intl';
@@ -24,19 +25,16 @@ try {
 }
 const localeData = getLocaleData(messages, locale);
 
-let element = document.getElementById('content');
-
-// Redux
-const reducer = Redux.combineReducers({
-    intl: intlReducer
-});
 const initialState = {
     intl: {
         locale: localeData.locale,
         messages: localeData.messages
     }
 };
-const store = Redux.createStore(reducer, initialState);
+
+const store = Redux.createStore(mainReducer, initialState);
+
+let element = document.getElementById('content');
 
 ReactDOM.render((
     <Provider store={store}>

@@ -27,10 +27,8 @@ export default class LoginLayer extends React.Component {
     _login(platform) {
         var loginPopup = window.open(Config.loginBaseURL + platform, "", "width=600,height=400");
         loginPopup.onunload = function() {
-            console.log("popup:");
-            console.log(myWindow);
-            console.log("responseData");
-            console.log(myWindow.responseData);
+            console.log(loginPopup);
+            console.log(loginPopup.responseData);
         };
     }
 

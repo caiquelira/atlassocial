@@ -9,7 +9,7 @@ import Menu       from 'grommet/components/Menu';
 
 import LoginLayer from 'components/LoginLayer';
 
-export default class LoginMenu extends React.Component {
+export default class UserMenu extends React.Component {
 
     constructor () {
         super();
@@ -60,7 +60,7 @@ export default class LoginMenu extends React.Component {
                     <FormattedMessage id="user.logout" />
                 </Anchor>
             </Menu>);
-        
+
         const loginLayer = (<LoginLayer
                                 hidden={!this.state.showLoginLayer}
                                 onClose={this._closeLoginLayer} />);
