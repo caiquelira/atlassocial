@@ -28,7 +28,8 @@ module.exports = {
 				"_id": userID,
 				"firstTime": firstTime
 			};
-			
+			console.log("Returning from facebook")
+			console.log(response)
 			res.render('return', {responseData: response});
 		});
 	},

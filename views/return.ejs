@@ -3,11 +3,13 @@
 	var responseData = <%-JSON.stringify(responseData)%>;
 	function WindowCloseItself() {
 		try {
-			window.responseData = responseData;
-			//window.close();
+			window.opener.loginCallBack(responseData);
 		}
-		catch (err) {console.log(err)}
-		return false;
+		catch (err) {
+			window.opener.loginCallBack(null, err);
+		}
+
+		window.close();
 	}
 	
 	window.onpaint = WindowCloseItself();
