@@ -1,25 +1,24 @@
-import React from "react";
+import React from "react"
+import { hashHistory } from 'react-router'
+import { FormattedMessage } from 'react-intl'
+import { connect } from 'react-redux'
 
-import {Link, hashHistory} from 'react-router';
+import App from 'grommet/components/App'
+import Article from 'grommet/components/Article'
+import Hero from 'grommet/components/Hero'
 
-import { FormattedMessage } from 'react-intl';
-
-import App from 'grommet/components/App';
-import Article from 'grommet/components/Article';
-import Hero from 'grommet/components/Hero';
-
-import NavBar from 'components/NavBar';
-import AtlasFooter from 'components/AtlasFooter';
+import NavBar from 'components/NavBar'
+import AtlasFooter from 'components/AtlasFooter'
 
 export default class Home extends React.Component {
 
     constructor(props) {
-        super(props);
+        super(props)
     }
 
 
     box(e) {
-        hashHistory.push('/project');
+        hashHistory.push('/project')
     }
 
     render() {
@@ -33,6 +32,6 @@ export default class Home extends React.Component {
                 <AtlasFooter/>
             </Article>
           </App>
-          );
+          )
     }
 };

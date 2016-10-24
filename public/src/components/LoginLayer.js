@@ -25,10 +25,12 @@ export default class LoginLayer extends React.Component {
     }
 
     _login(platform) {
-        var loginPopup = window.open(Config.loginBaseURL + platform, "", "width=600,height=400");
-        window.loginCallBack = function(responseData, err){
+        window.open(Config.loginBaseURL + platform, "", "width=600,height=400");
+        window.loginCallBack = (responseData, err) => {
+            // if firstTime: GOTO Edit Profile
+
             console.log(responseData);
-        }
+        };
     }
 
     render () {

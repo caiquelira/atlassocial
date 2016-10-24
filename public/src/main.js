@@ -1,5 +1,7 @@
 import 'grommet/grommet-hpe.min.css';
 
+import 'whatwg-fetch';
+
 import React        from "react";
 import ReactDOM     from "react-dom";
 import * as Redux   from 'redux';

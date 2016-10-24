@@ -1,28 +1,20 @@
-import LoginAction from 'actions/user';
+import UserAction from 'actions/user';
 
-export default function user(state = {}, action) {
+export default function user(state = { isLoggedIn: false, isFetching : false }, action) {
     switch (action.type) {
-        case LoginAction.LOGIN:
+        case UserAction.FETCH_USER_REQUEST:
+            return { isLoggedIn: false, isFetching: true };
+        case UserAction.FETCH_USER_SUCCESS:
+            return Object.assign({},
+                                 action.data,
+                                 { isLoggedIn: true, isFetching: false });
+        case UserAction.FETCH_USER_FAILURE:
             return {
-
-            }
-        case LoginAction.LOGOUT:
-        default: 
+                isLoggedIn: false,
+                isFetching: false,
+                error: action.error
+            };
+        default:
+            return state;
     }
-}
-
-const todos = (state = [], action) => {
-  switch (action.type) {
-    case 'ADD_TODO':
-      return [
-        ...state,
-        todo(undefined, action)
-      ]
-    case 'TOGGLE_TODO':
-      return state.map(t =>
-        todo(t, action)
-      )
-    default:
-      return state
-  }
 }
