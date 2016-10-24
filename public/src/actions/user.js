@@ -1,26 +1,26 @@
-import { Enum } from 'enumify';
+import { Enum } from 'enumify'
 
 export default class UserActions extends Enum {}
 UserActions.initEnum([
     'FETCH_USER_REQUEST',
     'FETCH_USER_SUCCESS',
     'FETCH_USER_FAILURE'
-]);
+])
 
 export const fetchUserRequest = (id) => ({
     type: UserActions.FETCH_USER_REQUEST,
     id
-});
+})
 
 export const fetchUserSuccess = (data) => ({
     type: UserActions.FETCH_USER_SUCCESS,
     data
-});
+})
 
 export const fetchUserFailure = (error) => ({
     type: UserActions.FETCH_USER_FAILURE,
     error
-});
+})
 
 export function fetchPosts(subreddit) {
 

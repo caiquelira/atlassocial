@@ -4,4 +4,4 @@ module.exports = {
     "Tenho Uma Ideia": "I have An Idea",
     "Procuro Um Projeto": "Looking For A Project",
     "Lorem Ipsum": "Lorem ipsum.em ingles"
-};
+}

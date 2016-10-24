@@ -1,14 +1,14 @@
-import React from 'react';
+import React from 'react'
 
-import Header from 'grommet/components/Header';
-import Title from 'grommet/components/Title';
+import Header from 'grommet/components/Header'
+import Title from 'grommet/components/Title'
 
-import UserMenu from 'components/UserMenu';
+import UserMenu from 'components/UserMenu'
 
 export default class NavBar extends React.Component {
 
     constructor(props) {
-        super(props);
+        super(props)
     }
 
     callLogin (e) {}
@@ -19,6 +19,6 @@ export default class NavBar extends React.Component {
               <Title>{this.props.title}</Title>
               <UserMenu />
             </Header>
-        );
+        )
     }
 }

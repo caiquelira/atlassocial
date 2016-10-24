@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 
-import Footer from 'grommet/components/Footer';
+import Footer from 'grommet/components/Footer'
 
 export default class NavBar extends React.Component {
 
     constructor(props) {
-        super(props);
+        super(props)
     }
 
     render() {
@@ -16,6 +16,6 @@ export default class NavBar extends React.Component {
                 Built using <a href="http://grommet.io" target="_blank">Grommet</a>.
               </p>
             </Footer>
-        );
+        )
     }
 }

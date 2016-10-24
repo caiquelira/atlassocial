@@ -1,44 +1,44 @@
-import React from 'react';
+import React from 'react'
 
-import {FormattedMessage} from 'react-intl';
+import {FormattedMessage} from 'react-intl'
 
-import Anchor     from 'grommet/components/Anchor';
-import Button     from 'grommet/components/Button';
-import Image      from 'grommet/components/Image';
-import Menu       from 'grommet/components/Menu';
+import Anchor     from 'grommet/components/Anchor'
+import Button     from 'grommet/components/Button'
+import Image      from 'grommet/components/Image'
+import Menu       from 'grommet/components/Menu'
 
-import LoginLayer from 'components/LoginLayer';
+import LoginLayer from 'components/LoginLayer'
 
 export default class UserMenu extends React.Component {
 
     constructor () {
-        super();
-        this._login = this._login.bind(this);
-        this._logout = this._logout.bind(this);
-        this._closeLoginLayer = this._closeLoginLayer.bind(this);
+        super()
+        this._login = this._login.bind(this)
+        this._logout = this._logout.bind(this)
+        this._closeLoginLayer = this._closeLoginLayer.bind(this)
         this.state = {
             loggedIn: false,
             showLoginLayer: false
-        };
+        }
     }
 
     _login() {
         this.setState({
             showLoginLayer: true
-        });
+        })
     }
 
     _logout() {
-        e.preventDefault();
+        e.preventDefault()
         this.setState({
             showLoginLayer: false
-        });
+        })
     }
 
     _closeLoginLayer(e) {
         this.setState({
             showLoginLayer: false
-        });
+        })
     }
 
     render () {
@@ -47,9 +47,9 @@ export default class UserMenu extends React.Component {
             <Button
                 label={<FormattedMessage id="login.login"/>}
                 primary={true}
-                onClick={this._login} />);
+                onClick={this._login} />)
         
-        const thumbNail = (<Image src="../img/user.png" size="thumb" />);
+        const thumbNail = (<Image src="../img/user.png" size="thumb" />)
 
         const userMenu = (
             <Menu icon={thumbNail} label="Lucas Müller">
@@ -59,14 +59,14 @@ export default class UserMenu extends React.Component {
                 <Anchor href="#" onClick={this._logout}>       
                     <FormattedMessage id="user.logout" />
                 </Anchor>
-            </Menu>);
+            </Menu>)
 
         const loginLayer = (<LoginLayer
                                 hidden={!this.state.showLoginLayer}
-                                onClose={this._closeLoginLayer} />);
+                                onClose={this._closeLoginLayer} />)
 
         return this.state.loggedIn ?
             <div>{loginLayer}{userMenu}</div>
-          : <div>{loginLayer}{loginButton}</div>;
+          : <div>{loginLayer}{loginButton}</div>
     }
 }

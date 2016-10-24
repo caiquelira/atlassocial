@@ -1,14 +1,14 @@
-import React from 'react';
+import React from 'react'
 
-import LoginLayer from 'components/LoginLayer';
+import LoginLayer from 'components/LoginLayer'
 
 export default function LoginRequired(WrappedComponent) {
 
     return class LoginWrapper extends React.Component {
 
         constructor(props) {
-            super(props);
-            this.state = {loggedIn: false};
+            super(props)
+            this.state = {loggedIn: false}
         }
 
         render() {
@@ -16,7 +16,7 @@ export default function LoginRequired(WrappedComponent) {
                 <div>
                     {this.state.loggedIn ? {null} : (<LoginLayer />)}
                     <WrappedComponent {...this.props} />
-                </div>);
+                </div>)
         }
-    };
+    }
 }
