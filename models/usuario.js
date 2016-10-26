@@ -13,7 +13,7 @@ var UsuarioSchema = new Schema({
 	age: Number,
 	competencies: [String],
 	profilePic: String,
-	projects: [project],
+	projects: [ {type : mongoose.Schema.ObjectId, ref : 'Projeto'} ],
 	auth: {
 		platform: String,
 		id: String,

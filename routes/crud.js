@@ -119,7 +119,8 @@ module.exports = function(router, route, ModelPath, config) {
 	
 	//READ
 	router.get(route + '/:UniqueIdentifier', function(req, res){
-		findObject(Model, req.params.UniqueIdentifier, config.uniqueIdentifier, res, function(object){	
+		findObject(Model, req.params.UniqueIdentifier, config.uniqueIdentifier, res, function(object){
+			// ESTUDAR O USO DE POPULATE PRA PREENCHER TODOS OS CAMPOS NECESSARIOS.
 			if (securityFilter(object, req, "GET")){
 				res.send(object);
 			}
