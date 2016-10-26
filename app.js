@@ -107,7 +107,6 @@ passport.deserializeUser(function(obj, done) {
 
 //Home
 app.get('/teste', function(req, res) {
-	console.log(req.session)
 	res.render('home', { user: req.user });
 });
 

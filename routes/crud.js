@@ -15,6 +15,18 @@ function readRequest(object, Model, req) {
 	return object;
 }
 
+function readQuery(object, Model, query) {
+	var Attributes = _.keys(Model.schema.paths);
+	_.forEach(Attributes, function(path){
+		value = _.get(query, path);
+		if(!_.isUndefined(value)){
+			_.set(object, path, JSON.parse(value));
+		}
+	});
+
+	return object;
+}
+
 function saveModel(object, res){
 	object.save(function(err, saved) {
 		if(err){
@@ -74,7 +86,10 @@ module.exports = function(router, route, ModelPath, config) {
 
 	//LIST
 	router.get(route, function(req, res) {
-		Model.find(req.query, function(err, objects) {
+
+		var query = {}
+		query = readQuery(query, Model, req.query)
+		Model.find(query, function(err, objects) {
 			if (securityFilter(objects, req, "LIST")){
 				if (err)
 					res.send(err);

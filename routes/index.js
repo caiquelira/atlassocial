@@ -23,9 +23,9 @@ var router = Express.Router();
 
 var apiDefinition = [
 	{	
-		"route": "/sensores",
-		"model": '../models/sensor',
-		"config": {"uniqueIdentifier": "alias"}
+		"route": "/projetos",
+		"model": '../models/projeto',
+		"config": {}
 	},
 	{
 		"route": "/usuarios",

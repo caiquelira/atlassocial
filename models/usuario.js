@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var project = require('./projeto.js')
 
 var UsuarioSchema = new Schema({
 	name: String,
@@ -9,13 +10,17 @@ var UsuarioSchema = new Schema({
 	gender: String,
 	bio: String,
 	occupation: String,
-	idade: Number,
+	age: Number,
+	competencies: [String],
+	profilePic: String,
+	projects: [project],
 	auth: {
 		platform: String,
 		id: String,
 		password: String
 	},
-	timeCreated: Date
+	timeCreated: Date,
+	lastUpdated: Date
 });
 
 module.exports = mongoose.model('Usuario', UsuarioSchema);
