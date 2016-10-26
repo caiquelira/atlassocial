@@ -1,6 +1,7 @@
 //Basic Crud template
 var _ = require('lodash');
 var mongoose = require('mongoose');
+/*var User = require('../models/user.js')*/
 
 function readRequest(object, Model, req) {
 	var Attributes = _.keys(Model.schema.paths);
@@ -43,12 +44,12 @@ function saveModel(object, res){
 function findObject(Model, param, uniqueIdentifier, res, cb){
 	var returnObject;
 	if (_.isUndefined(uniqueIdentifier)){
-		Model.findById(param, function(err, object){
+		Model.findById(param).exec(function(err, object){
 			if (err)
 			  res.send(err);
 		
 			cb(object);
-		});
+			});			
 	}
 	else{
 		var query = {};
@@ -61,14 +62,6 @@ function findObject(Model, param, uniqueIdentifier, res, cb){
 		});
 	}
 }
-
-
-function findObjectsByQuery(Model, query, res, cb){
-	var stream = Model.find(query)
-}
-
-
-
 
 module.exports = function(router, route, ModelPath, config) {
 	
@@ -107,6 +100,21 @@ module.exports = function(router, route, ModelPath, config) {
 		var object = new Model();
 	
 		object = readRequest(object, Model, req);
+
+		/*dummyuser = new User()
+		dummyuser.name="Dummy"
+		dummyuser.age =4
+		dummyuser.save(function(err, saved) {
+			if(err){
+				console.log(err)
+				res.send(err);
+			}
+			else {
+				console.log('Modelo salvo! \n', object);
+				res.status(200).json({SUCCESS: object});
+			}
+		}).then(object.creator=dummyuser);*/
+
 		
 		if (securityFilter(object, req, "POST")){	
 			saveModel(object, res);

@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var project = require('./projeto.js')
+var project = require('./project.js')
 
-var UsuarioSchema = new Schema({
+var UserSchema = new Schema({
 	name: String,
 	email: String,
 	city: String,
@@ -13,7 +13,7 @@ var UsuarioSchema = new Schema({
 	age: Number,
 	competencies: [String],
 	profilePic: String,
-	projects: [ {type : mongoose.Schema.ObjectId, ref : 'Projeto'} ],
+	projects: [ {type : mongoose.Schema.ObjectId, ref : 'Project'} ],
 	auth: {
 		platform: String,
 		id: String,
@@ -23,4 +23,4 @@ var UsuarioSchema = new Schema({
 	lastUpdated: Date
 });
 
-module.exports = mongoose.model('Usuario', UsuarioSchema);
+module.exports = mongoose.model('User', UserSchema);

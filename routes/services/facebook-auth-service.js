@@ -1,7 +1,7 @@
 var passport = require('passport');
 var Strategy = require('passport-facebook').Strategy;
 
-var Usuario = require('../../models/usuario');
+var User = require('../../models/user');
 
 module.exports = {
 
@@ -46,10 +46,10 @@ module.exports = {
 				query['auth.id'] = profile.id;
 				query['auth.platform'] = profile.provider;
 				query['auth.password'] = "";
-				Usuario.findOne(query).then( function(object) {
+				User.findOne(query).then( function(object) {
 					//If it don't, we construct a new object
 					if (object == null){
-						var newUser = new Usuario();
+						var newUser = new User();
 						newUser.name = profile.displayName;
 						newUser.auth = {
 							'id': profile.id,

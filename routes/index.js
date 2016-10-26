@@ -23,13 +23,13 @@ var router = Express.Router();
 
 var apiDefinition = [
 	{	
-		"route": "/projetos",
-		"model": '../models/projeto',
+		"route": "/projects",
+		"model": '../models/project',
 		"config": {}
 	},
 	{
-		"route": "/usuarios",
-		"model": '../models/usuario',
+		"route": "/users",
+		"model": '../models/user',
 		"config": {"security": "./security/defaultSecurity"}		
 	}
 ];
