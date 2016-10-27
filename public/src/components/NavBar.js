@@ -3,7 +3,7 @@ import React from 'react'
 import Header from 'grommet/components/Header'
 import Title from 'grommet/components/Title'
 
-import UserMenu from 'components/UserMenu'
+import ProfileMenu from 'components/ProfileMenu'
 
 export default class NavBar extends React.Component {
 
@@ -17,7 +17,7 @@ export default class NavBar extends React.Component {
         return (
             <Header direction="row" justify="between" large={true} pad={{horizontal: 'medium'}}>
               <Title>{this.props.title}</Title>
-              <UserMenu />
+              <ProfileMenu />
             </Header>
         )
     }

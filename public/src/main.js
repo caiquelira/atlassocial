@@ -1,12 +1,12 @@
 import 'grommet/grommet-hpe.min.css'
-
 import 'whatwg-fetch'
 
-import React        from "react"
-import ReactDOM     from "react-dom"
-import * as Redux   from 'redux'
-import { Provider } from 'react-intl-redux'
-import mainReducer  from 'reducers/mainReducer'
+import React           from "react"
+import ReactDOM        from "react-dom"
+import * as Redux      from 'redux'
+import { Provider }    from 'react-intl-redux'
+import mainReducer     from 'reducers/mainReducer'
+import thunkMiddleware from 'redux-thunk'
 
 import Routes from 'components/Routes'
 
@@ -34,7 +34,11 @@ const initialState = {
     }
 }
 
-const store = Redux.createStore(mainReducer, initialState)
+import createLogger from 'redux-logger'
+const store = Redux.createStore(
+                        mainReducer,
+                        initialState,
+                        Redux.applyMiddleware(thunkMiddleware, createLogger()))
 
 let element = document.getElementById('content')
 

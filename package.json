@@ -53,6 +53,8 @@
     "react-redux": "^4.4.5",
     "react-router": "^2.8.1",
     "redux": "^3.6.0",
+    "redux-logger": "^2.7.0",
+    "redux-thunk": "^2.1.0",
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.1",
     "underscore": "^1.8.3",
@@ -62,6 +64,7 @@
   "devDependencies": {
     "babel-cli": "^6.14.0",
     "babel-preset-react-hmre": "^1.1.1",
+    "react-hot-loader": "^3.0.0-beta.6",
     "webpack-dev-middleware": "^1.7.0",
     "webpack-hot-middleware": "^2.12.2"
   }

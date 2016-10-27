@@ -1,6 +1,9 @@
+import Config               from 'Config'
 import React                from 'react'
 import { FormattedMessage } from 'react-intl'
-import Config               from 'Config'
+import { connect }          from 'react-redux'
+import * as Redux           from 'redux'
+import * as ProfileActionCreators from 'actions/profile'
 
 import Box     from 'grommet/components/Box'
 import Button  from 'grommet/components/Button'
@@ -17,7 +20,7 @@ const OPTIONS = [ { platform: "facebook" , text: "login.facebook" , icon: (<Face
                   { platform: "google"   , text: "login.google"   , icon: (<GoogleIcon   /> )},
                   { platform: "email"    , text: "login.email"    , icon: (<EmailIcon    /> )}]
 
-export default class LoginLayer extends React.Component {
+class LoginLayer extends React.Component {
 
     constructor (props) {
         super(props)
@@ -25,16 +28,15 @@ export default class LoginLayer extends React.Component {
     }
 
     _login(platform) {
-        window.open(Config.loginBaseURL + platform, "", "width=600,height=400")
-        window.loginCallBack = (responseData, err) => {
-            // if firstTime: GOTO Edit Profile
-
-            console.log(responseData)
+        window.open(Config.AUTH_URL + platform, "", "width=600,height=400")
+        window.loginCallBack = (data, err) => {
+            // TODO: if firstTime: GOTO Edit Profile
+            this.props.fetchProfile(data._id)
+            this.props.onClose()
         }
     }
 
     render () {
-
         // TODO: change interface
         const links = (
             OPTIONS.map(op => ( 
@@ -61,3 +63,14 @@ export default class LoginLayer extends React.Component {
         return layer
     }
 }
+
+const mapStateToProps = (state) => ({
+    profile: state.profile
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    fetchProfile: (id) => dispatch(ProfileActionCreators.fetchProfile(id))
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginLayer)

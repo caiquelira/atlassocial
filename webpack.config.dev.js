@@ -3,9 +3,10 @@ var webpack = require("webpack");
 
 module.exports = {
   entry: [
+    "react-hot-loader/patch",
     "babel-polyfill",
-    "./public/src/main.js",
-    "webpack-hot-middleware/client"
+    "webpack-hot-middleware/client?reload=true",
+    "./public/src/main.js"
   ],
   output: {
     path: path.join(__dirname, 'public/build'),
@@ -13,7 +14,7 @@ module.exports = {
     publicPath: "/build/"
   },
   externals: {
-    Config: JSON.stringify(require('./config.dev.json'))
+    Config: JSON.stringify(require('./config')(false))
   },
   // assumes all JavaScript files you edit will be in src/
   // when importing from src/<file>.js, only need to specify as <file>
@@ -48,7 +49,7 @@ module.exports = {
   },
   plugins: [
       new webpack.optimize.OccurenceOrderPlugin(),
-      new webpack.HotModuleReplacementPlugin(),
+      new webpack.HotModuleReplacementPlugin({quiet: true}),
       new webpack.NoErrorsPlugin()
   ]
 };

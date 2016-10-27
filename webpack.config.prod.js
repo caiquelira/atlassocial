@@ -10,7 +10,7 @@ module.exports = {
         filename: 'bundle.js'
     },
     externals: {
-      Config: JSON.stringify(require('./config.prod.json'))
+      Config: JSON.stringify(require('./config')(true))
     },
     resolve: {
       root: path.resolve("./public/src"),

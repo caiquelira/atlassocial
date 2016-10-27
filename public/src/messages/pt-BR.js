@@ -1,4 +1,4 @@
-export default ptBR = {
+module.exports = {
     "login.login": "Entrar",
     "login.facebook": "Entrar com o Facebook",
     "login.google": "Entrar com Conta do Google",
@@ -6,8 +6,8 @@ export default ptBR = {
     "social-facebook": "Facebook",
     "social-google": "Google",
     "social-email": "E-Mail",
-    "user.edit": "Editar Perfil",
-    "user.logout": "Sair",
+    "profile.edit": "Editar Perfil",
+    "profile.logout": "Sair",
     "Tenho Uma Ideia": "Tenho Uma Ideia",
     "Procuro Um Projeto": "Procuro um Projeto",
     "Lorem Ipsum": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."

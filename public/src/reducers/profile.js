@@ -1,14 +1,14 @@
-import UserAction from 'actions/user'
+import ProfileAction from 'actions/profile'
 
-export default function user(state = { isLoggedIn: false, isFetching : false }, action) {
+export default function profile (state = { isLoggedIn: false, isFetching : false }, action) {
     switch (action.type) {
-        case UserAction.FETCH_USER_REQUEST:
+        case ProfileAction.FETCH_PROFILE_REQUEST:
             return { isLoggedIn: false, isFetching: true }
-        case UserAction.FETCH_USER_SUCCESS:
+        case ProfileAction.FETCH_PROFILE_SUCCESS:
             return Object.assign({},
                                  action.data,
                                  { isLoggedIn: true, isFetching: false })
-        case UserAction.FETCH_USER_FAILURE:
+        case ProfileAction.FETCH_PROFILE_FAILURE:
             return {
                 isLoggedIn: false,
                 isFetching: false,
