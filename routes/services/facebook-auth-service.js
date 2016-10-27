@@ -37,6 +37,7 @@ module.exports = {
 		passport.use(new Strategy({
 			clientID: "181579062250918",
 			clientSecret: "d522dffb41d5f912c9d5734a1149b28a",
+			profileFields: ['id', 'displayName', 'photos'],
 			//Need authorization at developers.facebook.com
 			callbackURL: process.env.BASE_URL + "/auth-service/login/facebook/return"
 		},
@@ -51,6 +52,7 @@ module.exports = {
 					if (object == null){
 						var newUser = new User();
 						newUser.name = profile.displayName;
+						newUser.profilePic = profile.photos[0].value
 						newUser.auth = {
 							'id': profile.id,
 							'platform': profile.provider,
