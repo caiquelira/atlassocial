@@ -2,7 +2,7 @@ import React from 'react'
 
 import Footer from 'grommet/components/Footer'
 
-export default class NavBar extends React.Component {
+export default class BaseFooter extends React.Component {
 
     constructor(props) {
         super(props)

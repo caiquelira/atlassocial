@@ -2,7 +2,6 @@ import Config               from 'Config'
 import React                from 'react'
 import { FormattedMessage } from 'react-intl'
 import { connect }          from 'react-redux'
-import * as Redux           from 'redux'
 import * as ProfileActionCreators from 'actions/profile'
 
 import Box     from 'grommet/components/Box'
@@ -11,14 +10,13 @@ import Layer   from 'grommet/components/Layer'
 import Menu    from 'grommet/components/Menu'
 import Section from 'grommet/components/Section'
 
-// TODO: Review Icons (was not updated)
-import FacebookIcon from 'grommet/components/icons/base/SocialFacebook'
-import GoogleIcon   from 'grommet/components/icons/base/SocialGoogle'
-import EmailIcon    from 'grommet/components/icons/base/SocialEmail'
+import FacebookIcon   from 'grommet/components/icons/base/SocialFacebook'
+import GooglePlusIcon from 'grommet/components/icons/base/SocialGooglePlus'
+import EmailIcon      from 'grommet/components/icons/base/SocialEmail'
 
-const OPTIONS = [ { platform: "facebook" , text: "login.facebook" , icon: (<FacebookIcon /> )},
-                  { platform: "google"   , text: "login.google"   , icon: (<GoogleIcon   /> )},
-                  { platform: "email"    , text: "login.email"    , icon: (<EmailIcon    /> )}]
+const OPTIONS = [ { platform: "facebook" , text: "login.facebook" , icon: (<FacebookIcon   /> )},
+                  { platform: "google"   , text: "login.google"   , icon: (<GooglePlusIcon /> )},
+                  { platform: "email"    , text: "login.email"    , icon: (<EmailIcon      /> )}]
 
 class LoginLayer extends React.Component {
 

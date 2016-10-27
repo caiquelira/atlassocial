@@ -4,7 +4,7 @@ import { Router, Route, hashHistory } from 'react-router'
 
 import Home          from 'components/Home'
 import LoginRequired from 'components/LoginRequired'
-import Project       from 'components/Project'
+import Projects       from 'components/Projects'
 
 export default class Routes extends React.Component {
 
@@ -12,7 +12,7 @@ export default class Routes extends React.Component {
         return (
             <Router history={hashHistory}>
                 <Route path="/"        component={Home}    />
-                <Route path="/project" component={LoginRequired(Project)} />
+                <Route path="/projects" component={LoginRequired(Projects)} />
             </Router>)
     }
 }

@@ -43,7 +43,7 @@ class ProfileMenu extends React.Component {
     }
 
     render () {
-        const { name, isLoggedIn } = this.props.profile
+        const { name, isLoggedIn, profilePic } = this.props.profile
 
         const loginButton = (
             <Button
@@ -51,7 +51,7 @@ class ProfileMenu extends React.Component {
                 primary={true}
                 onClick={this._login} />)
         
-        const thumbNail = (<Image src="../img/profile.png" size="thumb" />)
+        const thumbNail = (<Image src={profilePic} size="thumb" />)
 
         const profileMenu = (
             <Menu icon={thumbNail} label={name}>

@@ -8,13 +8,13 @@ export default function LoginRequired(WrappedComponent) {
 
         constructor(props) {
             super(props)
-            this.state = {loggedIn: false}
+            this.state = {loggedIn: true}
         }
 
         render() {
             return (
                 <div>
-                    <LoginLayer hidden={!this.state.loggedIn}/>
+                    <LoginLayer hidden={this.state.loggedIn}/>
                     <WrappedComponent {...this.props} />
                 </div>)
         }
