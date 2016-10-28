@@ -15,7 +15,7 @@ export default class NavBar extends React.Component {
 
     render() {
         return (
-            <Header direction="row" justify="between" large={true} pad={{horizontal: 'medium'}}>
+            <Header direction="row" justify="between" pad={{horizontal: 'medium'}}>
               <Title>{this.props.title}</Title>
               <ProfileMenu />
             </Header>

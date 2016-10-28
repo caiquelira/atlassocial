@@ -12,11 +12,11 @@ import Section from 'grommet/components/Section'
 
 import FacebookIcon   from 'grommet/components/icons/base/SocialFacebook'
 import GooglePlusIcon from 'grommet/components/icons/base/SocialGooglePlus'
-import EmailIcon      from 'grommet/components/icons/base/SocialEmail'
+import MailIcon       from 'grommet/components/icons/base/SocialMail'
 
 const OPTIONS = [ { platform: "facebook" , text: "login.facebook" , icon: (<FacebookIcon   /> )},
                   { platform: "google"   , text: "login.google"   , icon: (<GooglePlusIcon /> )},
-                  { platform: "email"    , text: "login.email"    , icon: (<EmailIcon      /> )}]
+                  { platform: "email"    , text: "login.email"    , icon: (<MailIcon      /> )}]
 
 class LoginLayer extends React.Component {
 

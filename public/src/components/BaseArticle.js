@@ -10,13 +10,13 @@ export default class BaseArticle extends React.Component {
 
     render() {
         return (
-          <App centered={false}>
-            <Article>
-                <NavBar title="Atlas" />
-                { this.props.children }
-                <BaseFooter/>
-            </Article>
-          </App>
+            <App centered={true}>
+                <Article>
+                    <NavBar title="Atlas" />
+                    { this.props.children }
+                    <BaseFooter/>
+                </Article>
+            </App>
           )
     }
 };

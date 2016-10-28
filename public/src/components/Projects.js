@@ -1,45 +1,44 @@
 import React from "react"
 import * as Redux from 'redux'
+import { FormattedMessage } from 'react-intl'
 import { connect } from 'react-redux'
+import _ from 'underscore'
 
 import * as ProjectsActionCreators from 'actions/projects'
 
 import Box from "grommet/components/Box"
 import Button from "grommet/components/Button"
-import Label from "grommet/components/Label"
-import Paragraph from "grommet/components/Paragraph"
-import Title from "grommet/components/Title"
-import Tile from "grommet/components/Tile"
-import Tiles from "grommet/components/Tiles"
+import Heading from "grommet/components/Heading"
+import Spinning from 'grommet/components/icons/Spinning'
 
-import BaseArticle from "components/BaseArticle"
 import ProjectCard from "components/ProjectCard"
+import ProjectFilter from 'components/ProjectFilter'
 
 class Projects extends React.Component {
 
     constructor (props) {
         super(props)
-        this.projects = [{
-            name: "Projeto do Yano",
-            description: "projeto usando node e react",
-            picture: "http://placehold.it/400x250",
-            location: "Sao Paulo"
-        }]
-
-    }
-
-    _test () {
-        console.log("teste")
+        this.props.actions.fetchProjects()
     }
 
     render () {
-        console.log(this.props.projects)
+        const { projects } = this.props
+        console.log(projects)
+        let content = null
+
+        if (_.isEmpty(projects))  content = null
+        else if (projects.isFetching)    content =  <Spinning />
+        else    content = projects.map(p => (<ProjectCard key={p._id} project={p}/>))
+
         return (
-            <BaseArticle>
-                <Button label="TESTE" onClick={this._test.bind(this)}/>
-                { this.projects.map(p => (<ProjectCard key={p.name} project={p}/>)) } 
-            </BaseArticle>
-            )
+        <Box colorIndex="grey-4-a" >
+            <Heading strong={true} margin="large" align="center">
+                <FormattedMessage id="project.projects" />
+            </Heading>
+            <ProjectFilter/>
+            { content }
+        </Box>
+        )
     }
 }
 

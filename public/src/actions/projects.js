@@ -9,8 +9,7 @@ ProjectsActions.initEnum([
 ])
 
 const fetchProjectsRequest = () => ({
-    type: ProjectsActions.FETCH_PROJECTS_REQUEST,
-    id
+    type: ProjectsActions.FETCH_PROJECTS_REQUEST
 })
 
 const fetchProjectsSuccess = (data) => ({
@@ -25,10 +24,9 @@ const fetchProjectsFailure = (error) => ({
 
 export const fetchProjects = () => async (dispatch) => {
     try {
-        dispatch(fetchProjectsRequest(id))
+        dispatch(fetchProjectsRequest())
         const response = await fetch(Config.PROJECTS_URL)
         const projects = await response.json()
-        console.log(projects)
         dispatch(fetchProjectsSuccess(projects))
     } catch (error) {
         dispatch(fetchProjectsFailure(error))

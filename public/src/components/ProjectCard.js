@@ -1,24 +1,38 @@
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
+import { hashHistory } from 'react-router'
 
-// import Card from 'grommet/components/Card'
-
-import Section from 'grommet/components/Section'
-import Image from 'grommet/components/Image'
-import Paragraph from 'grommet/components/Paragraph'
-import Header from 'grommet/components/Header'
-import Label from 'grommet/components/Label'
+import Anchor from 'grommet/components/Anchor'
+import Box from 'grommet/components/Box'
+import Card from 'grommet/components/Card'
+import LinkNext from 'grommet/components/icons/base/LinkNext'
 
 export default class ProjectCard extends React.Component {
 
+    constructor (props) {
+        super(props)
+        this._onClick.bind(this)
+    }
+
+    _onClick (id) {
+        hashHistory.push('projects/'+id)
+    }
     render () {
-        const { name, description, picture, location } = this.props.project
+        const { name, picture, city, state, _id} = this.props.project
+        let { description } = this.props.project
+        if (description.length > 200)   description = description.slice(0, 200) + '...'
         return (
-            <Section>
-                <Header><h3>{name}</h3></Header>
-                <Label>{location}</Label>
-                <Image src={picture} />
-                <Paragraph>{description}</Paragraph>
-            </Section>
+            <Box colorIndex="light-2" pad="medium" margin="small">
+                <Card
+                    direction="row"
+                    size="xlarge"
+                    label={city + '/' + state}
+                    thumbnail={picture}
+                    heading={name}
+                    description={description}
+                    link={<Anchor label={<FormattedMessage id="project.see"/>} icon={<LinkNext />} onClick={() => this._onClick(_id)} />}
+                    onClick={() => this._onClick(_id)} />
+            </Box>
             )
     }
 }
