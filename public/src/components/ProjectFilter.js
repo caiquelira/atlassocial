@@ -7,19 +7,20 @@ export default class ProjectsFilter extends React.Component {
 
     constructor (props) {
         super(props)
-        this._filterByText.bind(this)
-        this.text = ''
+        this._filterByText = this._filterByText.bind(this)
+        this.state = {text: ''}
     }
 
     _filterByText (event) {
-        console.log(event.target.value)
+        const text = event.target.value
+        this.setState({text})
+        this.props.actions.filterProjects({text})
     }
 
     render() {
-        let text = ''
         return (
-            <Box>
-                <Search inline={true} placeHolder="Buscar" value={text} onDOMChange={this._filterByText} />
+            <Box margin="large">
+                <Search inline={true} size="medium" placeHolder="Buscar" defaultValue={this.state.text} onDOMChange={this._filterByText} />
             </Box>
           )
     }

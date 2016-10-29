@@ -26,25 +26,30 @@ class Projects extends React.Component {
         console.log(projects)
         let content = null
 
-        if (_.isEmpty(projects))  content = null
-        else if (projects.isFetching)    content =  <Spinning />
+        if (this.props.isFetching)    content =  <Spinning />
+        else if (_.isEmpty(projects))  content = null
         else    content = projects.map(p => (<ProjectCard key={p._id} project={p}/>))
 
         return (
-        <Box colorIndex="grey-4-a" >
+        <Box>
             <Heading strong={true} margin="large" align="center">
                 <FormattedMessage id="project.projects" />
             </Heading>
-            <ProjectFilter/>
+            <ProjectFilter actions={this.props.actions}/>
             { content }
         </Box>
         )
     }
 }
 
+const filterProjects = (projects, filter) => filter ? projects.filter((p) => p.name.toLowerCase().includes(filter.text.toLowerCase())
+                                                                          || p.description.toLowerCase().includes(filter.text.toLowerCase())
+                                                                          || p.city.toLowerCase().includes(filter.text.toLowerCase()))
+                                                                          : projects
 
 const mapStateToProps = (state) => ({
-    projects: state.projects
+    projects: filterProjects(state.projects.values, state.projects.filter),
+    isFetching: state.projects.isFetching
 })
 
 const mapDispatchToProps = (dispatch) => ({

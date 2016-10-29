@@ -1,4 +1,4 @@
-import 'grommet/grommet-hpe.min.css'
+import 'grommet/grommet.min.css'
 import 'whatwg-fetch'
 
 import React           from "react"

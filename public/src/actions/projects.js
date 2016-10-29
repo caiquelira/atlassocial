@@ -5,7 +5,8 @@ export default class ProjectsActions extends Enum {}
 ProjectsActions.initEnum([
     'FETCH_PROJECTS_REQUEST',
     'FETCH_PROJECTS_SUCCESS',
-    'FETCH_PROJECTS_FAILURE'
+    'FETCH_PROJECTS_FAILURE',
+    'FILTER_PROJECTS'
 ])
 
 const fetchProjectsRequest = () => ({
@@ -20,6 +21,11 @@ const fetchProjectsSuccess = (data) => ({
 const fetchProjectsFailure = (error) => ({
     type: ProjectsActions.FETCH_PROJECTS_FAILURE,
     error
+})
+
+export const filterProjects = (filter) => ({
+    type: ProjectsActions.FILTER_PROJECTS,
+    filter
 })
 
 export const fetchProjects = () => async (dispatch) => {

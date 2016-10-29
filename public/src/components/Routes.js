@@ -6,6 +6,7 @@ import Home          from 'components/Home'
 import BaseArticle   from 'components/BaseArticle'
 import LoginRequired from 'components/LoginRequired'
 import Projects      from 'components/Projects'
+import Project      from 'components/Project'
 
 export default class Routes extends React.Component {
 
@@ -15,7 +16,7 @@ export default class Routes extends React.Component {
                 <Route path="/"component={BaseArticle}>
                     <IndexRoute                 component={Home} />
                     <Route path="/projects"     component={LoginRequired(Projects)} />
-                    <Route path="/projects/:id" component={BaseArticle} />
+                    <Route path="/projects/:id" component={LoginRequired(Project)} />
                 </Route>
             </Router>)
     }
