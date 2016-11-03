@@ -20,7 +20,7 @@ module.exports = {
   // when importing from src/<file>.js, only need to specify as <file>
   resolve: {
     root: path.resolve("./public/src"), // must be absolute path
-    extensions: ['', '.js', 'json', '.scss', '.css']
+    extensions: ['', '.js', '.json', '.scss', '.css']
   },
   devtool: "source-map", // source maps to ease debugging
   module: {

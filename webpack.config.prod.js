@@ -14,7 +14,7 @@ module.exports = {
     },
     resolve: {
       root: path.resolve("./public/src"),
-      extensions: ['', '.js', '.scss', '.css']
+      extensions: ['', '.js', '.json', '.scss', '.css']
     },
     plugins: [
       new webpack.optimize.OccurrenceOrderPlugin(),
