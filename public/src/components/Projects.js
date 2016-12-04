@@ -23,7 +23,6 @@ class Projects extends React.Component {
 
     render () {
         const { projects } = this.props
-        console.log(projects)
         let content = null
 
         if (this.props.isFetching)    content =  <Spinning />

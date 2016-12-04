@@ -15,6 +15,11 @@ export default class Home extends React.Component {
 
     constructor(props) {
         super(props)
+        this._goTo = this._goTo.bind(this)
+    }
+
+    _goTo(link) {
+        hashHistory.push(link)
     }
 
     render() {
@@ -39,7 +44,7 @@ export default class Home extends React.Component {
                         direction="column"
                         heading={<Heading align="center"><FormattedMessage id="home.engage"/></Heading>}
                         thumbnail={<Box align="center" pad="medium"><UserAddIcon size="xlarge"/></Box>}
-                        onClick={() => this._(hashHistory.push('/projects'))} />
+                        onClick={() => this._goTo('projects')} />
                     </Box>
                 </Box>
             </Box>

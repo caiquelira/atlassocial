@@ -1,4 +1,8 @@
 module.exports = {
+    "info": "info-icon",
+    "link.home": "Página Inicial",
+    "link.projects": "Projetos",
+    "link.submit": "Submeter Projeto",
     "login.login": "Entrar",
     "login.facebook": "Entrar com o Facebook",
     "login.google": "Entrar com Conta do Google",
@@ -12,5 +16,6 @@ module.exports = {
     "project.see": "Ver Projeto",
     "home.idea": "Tenho Uma Ideia",
     "home.engage": "Procuro um Projeto",
+    "user-add": "user-add-icon",
     "Lorem Ipsum": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 }
