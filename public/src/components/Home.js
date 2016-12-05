@@ -25,7 +25,7 @@ export default class Home extends React.Component {
     render() {
         return (
             <Box>
-                <Hero backgroundImage="../img/casdinho.jpg" colorIndex="accent-2-a">
+                <Hero backgroundImage="../img/casdinho.jpg" colorIndex="accent-1">
                     <Headline strong={true}><FormattedMessage id="Lorem Ipsum"/></Headline>
                 </Hero>
                 <Box align="stretch" direction="row" full="horizontal" justify="center">
@@ -35,7 +35,8 @@ export default class Home extends React.Component {
                         contentPad="medium"
                         direction="column"
                         heading={<Heading align="center"><FormattedMessage id="home.idea"/></Heading>}
-                        thumbnail={<Box align="center" pad="medium"><InfoIcon size="xlarge"/></Box>} />
+                        thumbnail={<Box align="center" pad="medium"><InfoIcon size="xlarge"/></Box>}
+                        onClick={() => this._goTo('submit')} />
                     </Box>
                     <Box pad={{horizontal: "large"}}>
                         <Card

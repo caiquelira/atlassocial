@@ -38,10 +38,11 @@ export const submitProject = (data) => async (dispatch) => {
             body: JSON.stringify(data)
         })
         const project = await response.json()
-        console.log(project)
-        dispatch(submitProjectSuccess(project))
+        dispatch(submitProjectSuccess(project.SUCCESS))
+        return project.SUCCESS._id
     } catch (error) {
         dispatch(submitProjectFailure(error))
+        return ''
     }
 }
 

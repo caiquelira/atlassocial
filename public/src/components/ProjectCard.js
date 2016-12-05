@@ -18,7 +18,7 @@ export default class ProjectCard extends React.Component {
         hashHistory.push('projects/'+id)
     }
     render () {
-        const { name, picture, city, _id} = this.props.project
+        const { name, picture, city, state, _id} = this.props.project
         let { description } = this.props.project
         if (description.length > 200)   description = description.slice(0, 200) + '...'
         return (
@@ -26,11 +26,13 @@ export default class ProjectCard extends React.Component {
                 <Card
                     direction="row"
                     size="xlarge"
-                    label={city}
+                    label={city + ' / ' + state}
                     thumbnail={picture}
                     heading={name}
                     description={description}
-                    link={<Anchor label={<FormattedMessage id="project.see"/>} icon={<LinkNext />} onClick={() => this._onClick(_id)} />}
+                    link={<Anchor label={<FormattedMessage id="project.see"/>}
+                                  icon={<LinkNext />}
+                                  onClick={() => this._onClick(_id)} />}
                     onClick={() => this._onClick(_id)} />
             </Box>
             )

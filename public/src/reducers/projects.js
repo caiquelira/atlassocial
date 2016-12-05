@@ -1,6 +1,6 @@
 import ProjectsAction from 'actions/projects'
 
-export default function projects (state = { }, action) {
+export default function projects (state = { values: [] }, action) {
     switch (action.type) {
         case ProjectsAction.SUBMIT_PROJECT_REQUEST:
             return state
