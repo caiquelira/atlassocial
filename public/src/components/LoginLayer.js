@@ -26,7 +26,7 @@ class LoginLayer extends React.Component {
     }
 
     _login(platform) {
-        window.open(Config.AUTH_URL + platform, "", "width=600,height=400")
+        window.open(Config.AUTH_URL + '/' + platform, "", "width=600,height=400")
         window.loginCallBack = (data, err) => {
             // TODO: if firstTime: GOTO Edit Profile
             this.props.fetchProfile(data._id)

@@ -5,7 +5,7 @@ export default function projects (state = { values: [] }, action) {
         case ProjectsAction.SUBMIT_PROJECT_REQUEST:
             return state
         case ProjectsAction.SUBMIT_PROJECT_SUCCESS:
-            let oldValues = state.values ? state.values : []
+            let oldValues = state.values
             return Object.assign({}, state, {values: oldValues.concat([action.project])})
         case ProjectsAction.SUBMIT_PROJECT_FAILURE:
             return Object.assign({}, state, {

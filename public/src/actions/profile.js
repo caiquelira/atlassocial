@@ -32,9 +32,9 @@ export const fetchProfile = (id) => async (dispatch) => {
     // console.log(dispatch)
     try {
         dispatch(fetchProfileRequest(id))
-        const response = await fetch(Config.USERS_URL + id)
+        const response = await fetch(Config.USERS_URL + '/' + id)
         const user = await response.json()
-        //onsole.log(user)
+        //console.log(user)
         dispatch(fetchProfileSuccess(user))
     } catch (error) {
         //console.log("Erro no fetch user")

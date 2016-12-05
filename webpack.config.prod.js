@@ -7,7 +7,8 @@ module.exports = {
     ],
     output: {
         path: path.join(__dirname, 'public/build'),
-        filename: 'bundle.js'
+        filename: 'bundle.js',
+        publicPath: "/build/"
     },
     externals: {
       Config: JSON.stringify(require('./config')(true))

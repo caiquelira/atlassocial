@@ -71,6 +71,7 @@ class SubmitProject extends React.Component {
 
     async _submit(e) {
         e.preventDefault()
+        this.setState({creator: this.props.myId})
         const id = await this.props.actions.submitProject(this.state)
         hashHistory.push('projects/' + id)
     }
@@ -137,7 +138,8 @@ class SubmitProject extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    isFetching: state.projects.isFetching
+    isFetching: state.projects.isFetching,
+    myId: state.profile._id
 })
 
 const mapDispatchToProps = (dispatch) => ({
