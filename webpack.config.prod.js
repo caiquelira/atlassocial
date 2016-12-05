@@ -3,6 +3,7 @@ var webpack = require('webpack');
 
 module.exports = {
     entry: [
+        "babel-polyfill",
         './public/src/main.js'
     ],
     output: {

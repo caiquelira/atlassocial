@@ -7,7 +7,7 @@ module.exports = {
     "login.login": "Sign In",
     "login.facebook": "Sign In With Facebook",
     "login.google": "Sign In With Google Account",
-    "login.email": "Sign In With E-Mail",,
+    "login.email": "Sign In With E-Mail",
     "submit.back": "Go Back",
     "submit.form.city": "City",
     "submit.form.description": "Description",
