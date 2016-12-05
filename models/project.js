@@ -7,8 +7,6 @@ var ProjectSchema = new Schema({
 	city: String,
 	state: String,
 	creator: {type : mongoose.Schema.ObjectId, ref : 'User'},
-	contribuitors: [ {type : mongoose.Schema.ObjectId, ref : 'User'} ],
-	admins: [ {type : mongoose.Schema.ObjectId, ref : 'User'} ],
 	description: String,
 	tags: [String],
 	picture: String,

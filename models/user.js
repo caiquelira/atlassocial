@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var project = require('./project.js')
 
 var UserSchema = new Schema({
 	name: String,
@@ -13,7 +12,6 @@ var UserSchema = new Schema({
 	age: Number,
 	competencies: [String],
 	profilePic: String,
-	projects: [ {type : mongoose.Schema.ObjectId, ref : 'Project'} ],
 	auth: {
 		platform: String,
 		id: String,

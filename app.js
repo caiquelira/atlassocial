@@ -31,17 +31,18 @@ console.log("Base URL: ", process.env.BASE_URL);
 
 //NPM packages
 var Express = require('express');
-var _ = require ("underscore");
 var bodyParser = require ("body-parser");
 var logger = require('morgan');
-var mongoose = require('mongoose');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
+var mongoose = require('mongoose');
+var _ = require ("underscore");
 
 
 //Configuring routes (APIs)
 var routes = require('./routes/index');
 var facebookAuthService = require('./routes/services/facebook-auth-service');
+var googleAuthService = require('./routes/services/google-auth-service');
 
 //var passport = require('./passportConfig')
 
@@ -89,6 +90,9 @@ app.set('view engine', 'ejs');
 
 //Configuring Facebook Auth
 passport = facebookAuthService.strategy_config(passport);
+passport = googleAuthService.strategy_config(passport);
+
+
 
 // Initialize Passport and restore authentication state, if any, from the
 // session.
@@ -112,6 +116,7 @@ app.get('/teste', function(req, res) {
 
 //Configurating auth-service
 facebookAuthService.routes(app);
+googleAuthService.routes(app);
 
 // Debug React
 if (process.env.NODE_ENV && process.env.NODE_ENV.trim() === 'react') {

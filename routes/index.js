@@ -32,7 +32,12 @@ var apiDefinition = [
 		"route": "/users",
 		"model": '../models/user',
 		"config": {"security": "./security/defaultSecurity"}		
-	}
+	},
+	{
+		"route": "/memberships",
+		"model": '../models/membership',
+		"config": {"security": "./security/defaultSecurity"}		
+	},
 ];
 
 
