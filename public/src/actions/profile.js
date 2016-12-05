@@ -5,7 +5,8 @@ export default class ProfileActions extends Enum {}
 ProfileActions.initEnum([
     'FETCH_PROFILE_REQUEST',
     'FETCH_PROFILE_SUCCESS',
-    'FETCH_PROFILE_FAILURE'
+    'FETCH_PROFILE_FAILURE',
+    'LOGOUT'
 ])
 
 const fetchProfileRequest = (id) => ({
@@ -21,6 +22,10 @@ const fetchProfileSuccess = (data) => ({
 const fetchProfileFailure = (error) => ({
     type: ProfileActions.FETCH_PROFILE_FAILURE,
     error
+})
+
+export const logout = () => ({
+    type: ProfileActions.LOGOUT
 })
 
 export const fetchProfile = (id) => async (dispatch) => {

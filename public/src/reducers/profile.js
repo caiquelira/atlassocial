@@ -2,6 +2,8 @@ import ProfileAction from 'actions/profile'
 
 export default function profile (state = { isLoggedIn: false, isFetching : false }, action) {
     switch (action.type) {
+        case ProfileAction.LOGOUT:
+            return { isLoggedIn: false, isFetching : false }
         case ProfileAction.FETCH_PROFILE_REQUEST:
             return { isLoggedIn: false, isFetching: true }
         case ProfileAction.FETCH_PROFILE_SUCCESS:

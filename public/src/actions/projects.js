@@ -46,7 +46,7 @@ export const submitProject = (data) => async (dispatch) => {
     }
 }
 
-// FETCH
+// FETCH ALL
 
 const fetchProjectsRequest = () => ({
     type: ProjectsActions.FETCH_PROJECTS_REQUEST

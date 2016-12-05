@@ -2,9 +2,10 @@ import React from 'react'
 import { FormattedMessage } from 'react-intl'
 import { connect } from 'react-redux'
 
-import * as ProfileActionCreators from 'actions/profile'
+import { logout } from 'actions/profile'
 
 import Anchor     from 'grommet/components/Anchor'
+import Box     from 'grommet/components/Box'
 import Button     from 'grommet/components/Button'
 import Image      from 'grommet/components/Image'
 import Menu       from 'grommet/components/Menu'
@@ -29,11 +30,9 @@ class ProfileMenu extends React.Component {
         })
     }
 
-    _logout() {
+    _logout(e) {
         e.preventDefault()
-        this.setState({
-            showLoginLayer: false
-        })
+        this.props.logout()
     }
 
     _closeLoginLayer(e) {
@@ -54,11 +53,11 @@ class ProfileMenu extends React.Component {
         const thumbNail = (<Image src={profilePic} size="thumb" />)
 
         const profileMenu = (
-            <Menu icon={<div>{thumbNail}{name}</div>}>
+            <Menu icon={<div>{thumbNail}{'  '+name}</div>}>
                 <Anchor href="#" >
                     <FormattedMessage id="profile.edit" />
                 </Anchor>
-                <Anchor href="#" onClick={this._logout}>       
+                <Anchor onClick={this._logout}>       
                     <FormattedMessage id="profile.logout" />
                 </Anchor>
             </Menu>)
@@ -77,4 +76,8 @@ const mapStateToProps = (state) => ({
     profile: state.profile
 })
 
-export default connect(mapStateToProps)(ProfileMenu)
+const mapDispatchToProps = (dispatch) => ({
+    logout: () => dispatch(logout())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileMenu)
