@@ -30,5 +30,5 @@ module.exports = {
     "home.idea": "I Have An Idea",
     "home.engage": "I Am Looking For A Project",
     "user-add": "user-add-icon",
-    "Lorem Ipsum": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    "Lorem Ipsum": "Contribute to projects near you"
 }
