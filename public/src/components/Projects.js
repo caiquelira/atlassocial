@@ -41,10 +41,11 @@ class Projects extends React.Component {
     }
 }
 
-const filterProjects = (projects, filter) => filter ? projects.filter((p) => p.name.toLowerCase().includes(filter.text.toLowerCase())
-                                                                          || p.description.toLowerCase().includes(filter.text.toLowerCase())
-                                                                          || p.city.toLowerCase().includes(filter.text.toLowerCase()))
-                                                                          : projects
+const filterProjects = (projects, filter) => 
+    filter ? projects.filter((p) => (p.name && p.name.toLowerCase().includes(filter.text.toLowerCase()))
+                                 || (p.description && p.description.toLowerCase().includes(filter.text.toLowerCase()))
+                                 || (p.city && p.city.toLowerCase().includes(filter.text.toLowerCase())))
+                                 : projects
 
 const mapStateToProps = (state) => ({
     projects: filterProjects(state.projects.values, state.projects.filter),

@@ -71,8 +71,8 @@ class SubmitProject extends React.Component {
 
     async _submit(e) {
         e.preventDefault()
-        this.setState({creator: this.props.myId})
-        const id = await this.props.actions.submitProject(this.state)
+        const form = Object.assign({}, this.state, {creator: this.props.myId})
+        const id = await this.props.actions.submitProject(form)
         hashHistory.push('projects/' + id)
     }
 

@@ -35,10 +35,9 @@ class Project extends React.Component {
         const { picture, name, description, city, state, creator: creatorId } = this.props.project
         const creator = this.props.users[creatorId]
         console.log(this.props.profile)
-        const link = (<Anchor href="" label={<FormattedMessage id="project."/>} />)
         const contr = creatorId === this.props.profile._id ? 
-              (<Button label={<FormattedMessage id="project.contribute"/>} onClick={this._contribute}/>)
-            : (<Button label={<FormattedMessage id="project.isAdmin"/>} />)
+              (<Button label={<FormattedMessage id="project.isAdmin"/>} />)
+             :(<Button label={<FormattedMessage id="project.contribute"/>} onClick={this._contribute}/>)
 
         return (    
             <Box direction="column" justify="between" pad="medium" margin="medium">
@@ -50,6 +49,7 @@ class Project extends React.Component {
                   <Heading strong={true}>{name}</Heading>
                   <Heading tag="h3">{city + '/' + state}</Heading>
                   <Label><FormattedMessage id="project.responsible" />: {creator ? creator.name : ''}</Label>
+                  {contr}
                 </Box>
               </Box>
               <Box align="center">
