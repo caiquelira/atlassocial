@@ -45,8 +45,6 @@ class ProfileMenu extends React.Component {
     render () {
         const { name, isLoggedIn, profilePic } = this.props.profile
 
-        // console.log(this.props.profile)
-
         const loginButton = (
             <Button
                 label={<FormattedMessage  id="login.login"/>}
@@ -56,7 +54,7 @@ class ProfileMenu extends React.Component {
         const thumbNail = (<Image src={profilePic} size="thumb" />)
 
         const profileMenu = (
-            <Menu icon={thumbNail} label={name}>
+            <Menu icon={<div>{thumbNail}{name}</div>}>
                 <Anchor href="#" >
                     <FormattedMessage id="profile.edit" />
                 </Anchor>
