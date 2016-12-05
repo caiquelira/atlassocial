@@ -2,8 +2,8 @@ import React from 'react'
 import { FormattedMessage } from 'react-intl' 
 import { hashHistory } from 'react-router'  
 
-import Anchor from 'grommet/components/Anchor'
 import Box from 'grommet/components/Box'
+import Button from 'grommet/components/Button'
 import Header from 'grommet/components/Header'
 import Menu from 'grommet/components/Menu'
 import Title from 'grommet/components/Title'
@@ -22,26 +22,21 @@ export default class NavBar extends React.Component {
     callLogin (e) {}
 
     _goTo(link) {
-        if (link === 'submit')
-            console.log('nao implementado')
-        else {
-            if (link === 'home')
-                link = ''
-            hashHistory.push(link)
-        }
+        if (link === 'home')
+            link = ''
+        hashHistory.push(link)
     }
 
 
     render() {
         const { title } = this.props
 
-        console.log(this.context)
-
         const menuAnchors = (
             MENU_LINKS.map(link => ( 
-                <Anchor key={link}
+                <Button key={link}
                         label={<FormattedMessage id={'link.' + link}/>}
-                        onClick={() => this._goTo(link)} />
+                        path={link === 'home' ? '/' : link}
+                        plain={true}/>
             )))
 
         return (

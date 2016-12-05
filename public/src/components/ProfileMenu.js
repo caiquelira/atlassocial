@@ -45,7 +45,7 @@ class ProfileMenu extends React.Component {
     render () {
         const { name, isLoggedIn, profilePic } = this.props.profile
 
-        console.log(this.props.profile)
+        // console.log(this.props.profile)
 
         const loginButton = (
             <Button

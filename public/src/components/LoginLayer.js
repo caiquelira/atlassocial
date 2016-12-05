@@ -14,9 +14,9 @@ import FacebookIcon   from 'grommet/components/icons/base/SocialFacebook'
 import GooglePlusIcon from 'grommet/components/icons/base/SocialGooglePlus'
 import MailIcon       from 'grommet/components/icons/base/SocialMail'
 
-const OPTIONS = [ { platform: "facebook" , text: "login.facebook" , icon: (<FacebookIcon   /> )},
-                  { platform: "google"   , text: "login.google"   , icon: (<GooglePlusIcon /> )},
-                  { platform: "email"    , text: "login.email"    , icon: (<MailIcon      /> )}]
+const OPTIONS = [ { platform: "facebook", icon: (<FacebookIcon   /> )},
+                  { platform: "google"  , icon: (<GooglePlusIcon /> )},
+                  { platform: "email"   , icon: (<MailIcon      /> )}]
 
 class LoginLayer extends React.Component {
 
@@ -43,7 +43,7 @@ class LoginLayer extends React.Component {
                     onClick={() => this._login(op.platform)}
                     icon={op.icon}
                     fill={false}
-                    label={<FormattedMessage id={op.text}/>} />
+                    label={<FormattedMessage id={'login.' + op.platform}/>} />
                 )))
 
         let layer = (

@@ -3,11 +3,49 @@ import Config from 'Config'
 
 export default class ProjectsActions extends Enum {}
 ProjectsActions.initEnum([
+    'SUBMIT_PROJECT_REQUEST',
+    'SUBMIT_PROJECT_SUCCESS',
+    'SUBMIT_PROJECT_FAILURE',
     'FETCH_PROJECTS_REQUEST',
     'FETCH_PROJECTS_SUCCESS',
     'FETCH_PROJECTS_FAILURE',
     'FILTER_PROJECTS'
 ])
+
+// SUBMIT
+
+const submitProjectRequest = (data) => ({
+    type: ProjectsActions.SUBMIT_PROJECT_REQUEST,
+    data
+})
+
+const submitProjectSuccess = (project) => ({
+    type: ProjectsActions.SUBMIT_PROJECT_SUCCESS,
+    project
+})
+
+const submitProjectFailure = (error) => ({
+    type: ProjectsActions.SUBMIT_PROJECT_FAILURE,
+    error
+})
+
+export const submitProject = (data) => async (dispatch) => {
+    try {
+        dispatch(submitProjectRequest(data))
+        const response = await fetch(Config.PROJECTS_URL, {
+            headers: {'Content-Type': 'application/json'},
+            method: 'POST',
+            body: JSON.stringify(data)
+        })
+        const project = await response.json()
+        console.log(project)
+        dispatch(submitProjectSuccess(project))
+    } catch (error) {
+        dispatch(submitProjectFailure(error))
+    }
+}
+
+// FETCH
 
 const fetchProjectsRequest = () => ({
     type: ProjectsActions.FETCH_PROJECTS_REQUEST
@@ -23,11 +61,6 @@ const fetchProjectsFailure = (error) => ({
     error
 })
 
-export const filterProjects = (filter) => ({
-    type: ProjectsActions.FILTER_PROJECTS,
-    filter
-})
-
 export const fetchProjects = () => async (dispatch) => {
     try {
         dispatch(fetchProjectsRequest())
@@ -38,3 +71,10 @@ export const fetchProjects = () => async (dispatch) => {
         dispatch(fetchProjectsFailure(error))
     }
 }
+
+// AUX
+
+export const filterProjects = (filter) => ({
+    type: ProjectsActions.FILTER_PROJECTS,
+    filter
+})
