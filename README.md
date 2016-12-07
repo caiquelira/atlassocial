@@ -5,12 +5,6 @@ Este projeto faz parte da disciplina **CES-26** Desenvolvimento de Aplicações 
 
 ----------
 
-##Índice
-
-[TOC]
-
-----------
-
 Arquitetura
 -------------
 
